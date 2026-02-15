@@ -7,14 +7,15 @@ import Link from 'next/link'
 import React from 'react'
 
 type OrderIDPageProps = {
-    params: {
+    params: Promise<{
         orderID: string;
-    }
+    }>
 }
 
 const OrderIDPage = async ({ params }: OrderIDPageProps) => {
+    const { orderID } = await params;
     const session = await auth();
-    const { orderID } = params;
+
     
     const order = await ApiRequests.get(`orders/order/${orderID}/`, session?.sessionToken);
     

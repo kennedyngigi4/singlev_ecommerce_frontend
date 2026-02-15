@@ -4,18 +4,19 @@ import { auth } from '@/auth';
 import PageClient from './pageClient';
 
 type OrderDetailsProps = {
-    params: {
+    params: Promise<{
         orderID: string;
-    }
+    }>
 }
 
 
 const OrderDetails = async ({ params }: OrderDetailsProps) => {
+    const { orderID } = await params;
     const session = await auth();
 
     if(!session?.sessionToken) return;
 
-    const order = await ApiRequests.get(`manager/order-details/${params.orderID}/`, session?.sessionToken);
+    const order = await ApiRequests.get(`manager/order-details/${orderID}/`, session?.sessionToken);
     
     
     
