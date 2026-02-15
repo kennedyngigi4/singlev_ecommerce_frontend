@@ -4,25 +4,26 @@ import PageClient from './pageClient';
 import { auth } from '@/auth';
 
 type ProductDetailsProps = {
-  params: {
+  params: Promise<{
     productID: string;
-  }
+  }>;
 }
 
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
+  const { productID } = await params;
   const session = await auth();
 
   if(!session?.sessionToken) return;
   
 
-  const product = await ApiRequests.get(`superadmin/products/products/${params.productID}/`, session?.sessionToken);
+  const product = await ApiRequests.get(`superadmin/products/products/${productID}/`, session?.sessionToken);
   const [categories, brands, featuresList] = await Promise.all([
     ApiRequests.get("superadmin/products/category-children/"),
     ApiRequests.get("products/brands/"),
     ApiRequests.get("products/features/"),
   ]);
           
-  console.log(product);
+ 
   
   if(!product){
     return (
