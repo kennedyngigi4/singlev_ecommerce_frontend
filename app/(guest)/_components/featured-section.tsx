@@ -14,7 +14,7 @@ type FeaturedSection = {
 
 
 export interface FeaturedSectionProps {
-    items: any;
+    items: any[];
 }
 
 const FeaturedSection = ({ items }: FeaturedSectionProps) => {

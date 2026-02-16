@@ -12,13 +12,15 @@ import MenuDrawerClient from '../menu-drawer/menu-drawer-client';
 
 
 export interface NavbarClientProps {
-  categories: any;
+  categories: any[];
 }
 
 const NavbarClient = ({ categories }: NavbarClientProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const totalItems = useCartStore((state) => state.getTotalItems());
   const { data: session, status } = useSession();
+
+  console.log(categories);
 
   return (
     <>
