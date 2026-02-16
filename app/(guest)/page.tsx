@@ -4,10 +4,10 @@ import { ApiRequests } from '@/lib/requests/api_requests';
 
 const page = async() => {
     
-    
+    const featuredProducts = await ApiRequests.serverGet("products/home/");
 
     return (
-        <HomepageClient />
+        <HomepageClient featured={featuredProducts} />
     )
 }
 

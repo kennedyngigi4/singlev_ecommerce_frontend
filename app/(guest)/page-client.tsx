@@ -14,9 +14,13 @@ export const metadata = {
 }
 
 
-const HomepageClient = async () => {
+export interface HomepageClientProps {
+  featured: any;
+}
 
-  const featuredProducts = await ApiRequests.get("products/home/");
+const HomepageClient = async ({ featured  }: HomepageClientProps) => {
+
+  
 
   return (
     <div className="container py-6">
@@ -33,7 +37,7 @@ const HomepageClient = async () => {
 
 
       <div className="mt-5">
-        <FeaturedSection items={featuredProducts} />
+        <FeaturedSection items={featured} />
       </div>
 
     </div>
