@@ -4,7 +4,10 @@ import { ApiRequests } from '@/lib/requests/api_requests';
 
 const SidebarMenu = async() => {
 
-    const categories = await ApiRequests.serverGet("products/categories");
+    const categories = await fetch(
+        `${process.env.APIURL}/products/categories/`,
+        { cache: "no-store" }
+    ).then(res => res.json());
 
    
 

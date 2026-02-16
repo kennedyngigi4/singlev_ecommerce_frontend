@@ -5,7 +5,10 @@ import { ApiRequests } from '@/lib/requests/api_requests';
 const page = async() => {
     
     const featuredProducts = await ApiRequests.serverGet("products/home/");
-    const categories = await ApiRequests.serverGet("products/categories");
+    const categories = await fetch(
+        `${process.env.APIURL}/products/categories/`,
+        { cache: "no-store" }
+    ).then(res => res.json());
 
     return (
         <HomepageClient featured={featuredProducts} categories={categories} />

@@ -4,7 +4,10 @@ import NavbarClient from './navbar-client';
 
 const Navbar = async () => {
 
-  const categories = await ApiRequests.serverGet("products/categories");
+  const categories = await fetch(
+    `${process.env.APIURL}/products/categories/`,
+    { cache: "no-store" }
+  ).then(res => res.json());
   
 
   return (
