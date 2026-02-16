@@ -53,6 +53,16 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
       <nav className="sticky top-0 z-50 bg-white border-b shadow-sm">
         <div className="container">
           <div className="flex items-center justify-between h-16">
+            
+            {/* Mobile Menu Button */}
+            <div
+              className="md:hidden p-2 rounded-md hover:bg-gray-100"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <MenuDrawerClient categories={categories} />
+            </div>
+
 
             {/* Logo - Hidden on medium screens when search is full width */}
             <div className="flex items-center md:hidden lg:flex">
@@ -75,14 +85,7 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div
-              className="md:hidden p-2 rounded-md hover:bg-gray-100"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <MenuDrawerClient categories={categories} />
-            </div>
+            
 
             {/* Search Bar - Full width on large screens */}
             <div className="hidden md:flex flex-1 max-w-2xl mx-4 lg:mx-8">
