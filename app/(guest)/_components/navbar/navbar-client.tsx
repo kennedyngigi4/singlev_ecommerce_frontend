@@ -73,8 +73,8 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
 
 
             {/* Shopping cart + user icon */}
-            <div className="md:hidden flex">
-              <div>
+            <div className="md:hidden">
+             
                 <Link href="/cart">
                   <Button variant="ghost" size="sm" className="relative cursor-pointer">
                     <ShoppingCartIcon className="w-4 h-4 mr-2" />
@@ -84,36 +84,8 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
                     </span>
                   </Button>
                 </Link>
-              </div>
-              <div>
-                {status !== "authenticated"
-                  ?
-                  <>
-                    <Link href="/login">
-
-                      <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer">
-                        <User className="w-4 h-4 mr-2" />
-                       
-                      </Button>
-                      <Button variant="ghost" size="sm" className="lg:hidden">
-                        <User className="w-4 h-4" />
-                      </Button>
-                    </Link>
-                  </>
-                  : <>
-                    <Link href={session?.user?.role === "client" ? "/user" : `/${session?.user?.role}`} className="capitalize">
-
-                      <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer capitalize">
-                        <User className="w-4 h-4 mr-2" />
-                        
-                      </Button>
-                      <Button variant="ghost" size="sm" className="lg:hidden">
-                        <User className="w-4 h-4" />
-                      </Button>
-                    </Link>
-                  </>
-                }
-              </div>
+              
+              
             </div>
 
             

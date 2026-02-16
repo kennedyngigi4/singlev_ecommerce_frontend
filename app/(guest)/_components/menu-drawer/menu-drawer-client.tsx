@@ -5,6 +5,8 @@ import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/s
 import { FacebookIcon, HelpCircleIcon, InstagramIcon, MenuIcon, TwitterIcon, User } from 'lucide-react';
 import Link from 'next/link';
 import SidebarMenuClient from '../sidebar/sidebar-menu-client';
+import { useSession } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
 
 
 export interface MenuDrawerClientProps {
@@ -12,6 +14,7 @@ export interface MenuDrawerClientProps {
 }
 
 const MenuDrawerClient = ({ categories  }: MenuDrawerClientProps) => {
+    const {data:session, status } = useSession()
     
     return (
         <Sheet>
@@ -37,10 +40,35 @@ const MenuDrawerClient = ({ categories  }: MenuDrawerClientProps) => {
                             <SidebarMenuClient categories={categories} />
                         </div>
                         <SheetClose asChild>
-                            <Link href="/account" className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100">
-                                <User className="w-5 h-5" />
-                                Account
-                            </Link>
+                            {status !== "authenticated"
+                                ?
+                                <>
+                                    <Link href="/login">
+
+                                        <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer">
+                                            <User className="w-4 h-4 mr-2" />
+                                            Account
+                                        </Button>
+                                        <Button variant="ghost" size="sm" className="lg:hidden">
+                                            <User className="w-4 h-4" />
+                                            Account
+                                        </Button>
+                                    </Link>
+                                </>
+                                : <>
+                                    <Link href={session?.user?.role === "client" ? "/user" : `/${session?.user?.role}`} className="capitalize">
+
+                                        <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer capitalize">
+                                            <User className="w-4 h-4 mr-2" />
+                                            {session?.user?.name}
+                                        </Button>
+                                        <Button variant="ghost" size="sm" className="lg:hidden">
+                                            <User className="w-4 h-4" />
+                                        </Button>
+                                    </Link>
+                                </>
+                            }
+                            
                         </SheetClose>
 
                         <SheetClose asChild>
