@@ -39,7 +39,7 @@ const Homepage = async () => {
 
 
       <div className="mt-5">
-        {Array.isArray(featuredProducts) ? featuredProducts?.map((featured: FeaturedSection) => (
+        {featuredProducts?.map((featured: FeaturedSection) => (
           <div key={featured.id} className="bg-white rounded shadow flex flex-col mb-5">
             <div
               style={{ backgroundColor: featured.bg_title_color, color: featured.title_color }}
@@ -59,8 +59,7 @@ const Homepage = async () => {
               )}
             </div>
           </div>
-        )) : null
-        }
+        ))}
       </div>
 
     </div>
