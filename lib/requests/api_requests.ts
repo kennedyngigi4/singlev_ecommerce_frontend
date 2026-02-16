@@ -50,6 +50,29 @@ export const ApiRequests = {
         }
     },
 
+    serverGet: async function (url: string, token?: string | null): Promise<any> {
+        try {
+            const headers: Record<string, any> = {};
+            if (token) headers["Authorization"] = `Bearer ${token}`;
+
+            const response = await fetch(`${process.env.APIURL}/${url}`, {
+                method: "GET",
+                headers: headers
+            });
+            const res = await response.json();
+
+            if (!response.ok) {
+                return { succes: false, message: res?.errors || "Request failed." }
+            }
+
+            return res;
+
+        } catch (e) {
+            return { success: false, message: "An error occurred." };
+        }
+    },
+
+
 
     patch: async function (url: string, token: string | null, data: FormData | Record<string, any>): Promise<any> {
         try {

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
-const Footer = () => {
+const FooterClient = () => {
   return (
     <div className="container bg-qsecondary py-6 text-white flex flex-col space-y-5">
       
@@ -72,4 +72,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default FooterClient

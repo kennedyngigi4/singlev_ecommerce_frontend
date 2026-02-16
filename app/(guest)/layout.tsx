@@ -1,11 +1,9 @@
-"use client";
-
 import React from 'react';
-import Navbar from './_components/navbar';
-import Footer from './_components/footer';
+import Navbar from './_components/navbar/navbar';
+import Footer from './_components/footer/footer';
 
 
-const GuestLayout = ({ children } : { children: React.ReactNode}) => {
+const GuestLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <div>

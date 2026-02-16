@@ -19,7 +19,7 @@ export interface FeaturedSectionProps {
 
 const FeaturedSection = ({ items }: FeaturedSectionProps) => {
 
-    console.log(items)
+    
 
   return (
     <div>
@@ -33,7 +33,7 @@ const FeaturedSection = ({ items }: FeaturedSectionProps) => {
 
                   <div className="py-2">
                       {featured?.products?.length > 0 && (
-                          <div className="grid md:grid-cols-5 gap-5">
+                          <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
                               {featured?.products.map((product: ProductCard) => (
 
                                   <ProductCardComponent key={product.id} product={product} />

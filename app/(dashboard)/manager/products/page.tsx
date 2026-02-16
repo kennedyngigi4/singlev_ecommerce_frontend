@@ -11,7 +11,7 @@ const ProductPage = async () => {
 
   if(!session?.sessionToken) return;
 
-  const products = await ApiRequests.get("manager/products/", session?.sessionToken);
+  const products = await ApiRequests.serverGet("manager/products/", session?.sessionToken);
   
 
   return (

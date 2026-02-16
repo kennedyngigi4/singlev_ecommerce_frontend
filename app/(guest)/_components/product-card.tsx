@@ -34,7 +34,7 @@ const ProductCardComponent = ({ product }: ProductCardProps) => {
         <Card>
             <CardContent className="px-2">
                 <Link key={product.id} href={`${product.category}/${product.slug}`}>
-                    <div className="relative w-full h-50">
+                    <div className="relative w-full h-25 md:h-50">
                         <Image src={product?.thumbnail} alt="" fill className="object-cover" />
                     </div>
                     <h1 className="line-clamp-2 text-ellipsis text-sm pt-3">{product.name}</h1>

@@ -16,7 +16,7 @@ const OrderDetails = async ({ params }: OrderDetailsProps) => {
 
     if(!session?.sessionToken) return;
 
-    const order = await ApiRequests.get(`manager/order-details/${orderID}/`, session?.sessionToken);
+    const order = await ApiRequests.serverGet(`manager/order-details/${orderID}/`, session?.sessionToken);
     
     
     

@@ -1,23 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { ApiRequests } from "@/lib/requests/api_requests";
 import Image from "next/image";
-import { Category } from "@/lib/models/products";
 
-export default function SidebarMenu() {
-    const [categories, setCategories] = useState<Category[]>([]);
+export interface SidebarMenuClientProps {
+    categories: any;
+}
+
+export default function SidebarMenuClient({ categories }: SidebarMenuClientProps) {
+    
     const [active, setActive] = useState<any>(null);
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const resp = await ApiRequests.get("products/categories");
-            setCategories(resp);
-        };
-        fetchData();
-    }, []);
 
     return (
         <div
@@ -28,8 +23,8 @@ export default function SidebarMenu() {
             }}
         >
             {/* LEFT SIDEBAR */}
-            <aside className="w-64 bg-white border-0 rounded-xl shadow-sm">
-                {categories.map((cat) => (
+            <aside className="w-64 bg-white border-0 rounded-xl md:shadow-sm">
+                {categories?.map((cat: any) => (
                     <div
                         key={cat.id}
                         onMouseEnter={() => {

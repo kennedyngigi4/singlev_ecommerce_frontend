@@ -1,17 +1,24 @@
 "use client";
 
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCartStore } from '@/store/cartStore';
 import { FacebookIcon, HelpCircleIcon, InstagramIcon, MenuIcon, SearchIcon, ShoppingCartIcon, TwitterIcon, User, XIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import MenuDrawerClient from '../menu-drawer/menu-drawer-client';
 
-const Navbar = () => {
+
+
+export interface NavbarClientProps {
+  categories: any;
+}
+
+const NavbarClient = ({ categories }: NavbarClientProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const totalItems = useCartStore((state) => state.getTotalItems());
-  const { data:session, status } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <>
@@ -54,14 +61,28 @@ const Navbar = () => {
               </Link>
             </div>
 
+
+            {/* Shopping cart icon */}
+            <div className="md:hidden">
+              <Link href="/cart">
+                <Button variant="ghost" size="sm" className="relative cursor-pointer">
+                  <ShoppingCartIcon className="w-4 h-4 mr-2" />
+                  <span className="hidden lg:inline">Cart</span>
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                </Button>
+              </Link>
+            </div>
+
             {/* Mobile Menu Button */}
-            <button
+            <div
               className="md:hidden p-2 rounded-md hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
-            </button>
+              <MenuDrawerClient categories={categories} />
+            </div>
 
             {/* Search Bar - Full width on large screens */}
             <div className="hidden md:flex flex-1 max-w-2xl mx-4 lg:mx-8">
@@ -82,22 +103,22 @@ const Navbar = () => {
 
             {/* Desktop Actions - Hidden on mobile */}
             <div className="hidden md:flex items-center space-x-2">
-              {status !== "authenticated" 
-                ? 
-                  <>
-                    <Link href="/login">
+              {status !== "authenticated"
+                ?
+                <>
+                  <Link href="/login">
 
-                      <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer">
-                        <User className="w-4 h-4 mr-2" />
-                        Account
-                      </Button>
-                      <Button variant="ghost" size="sm" className="lg:hidden">
-                        <User className="w-4 h-4" />
-                      </Button>
-                    </Link>
-                  </> 
+                    <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer">
+                      <User className="w-4 h-4 mr-2" />
+                      Account
+                    </Button>
+                    <Button variant="ghost" size="sm" className="lg:hidden">
+                      <User className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                </>
                 : <>
-                  <Link href={`/${session?.user?.role}`} className="capitalize">
+                  <Link href={session?.user?.role === "client" ? "/user" : `/${session?.user?.role}`} className="capitalize">
 
                     <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer capitalize">
                       <User className="w-4 h-4 mr-2" />
@@ -107,9 +128,9 @@ const Navbar = () => {
                       <User className="w-4 h-4" />
                     </Button>
                   </Link>
-                  </>
+                </>
               }
-              
+
 
               <Link href="/help">
                 <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer">
@@ -150,51 +171,11 @@ const Navbar = () => {
             </form>
           </div>
 
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden border-t py-4">
-              <div className="space-y-2">
-                <Link
-                  href="/account"
-                  className="flex items-center p-2 hover:bg-gray-100 rounded-md"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <User className="w-5 h-5 mr-3" />
-                  Account
-                </Link>
-                <Link
-                  href="/help"
-                  className="flex items-center p-2 hover:bg-gray-100 rounded-md"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <HelpCircleIcon className="w-5 h-5 mr-3" />
-                  Help
-                </Link>
-                <Link
-                  href="/track-order"
-                  className="flex items-center p-2 hover:bg-gray-100 rounded-md"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Track Your Order
-                </Link>
-                <div className="flex items-center p-2 space-x-4">
-                  <Link href="#" aria-label="Facebook">
-                    <FacebookIcon className="w-5 h-5 text-gray-600" />
-                  </Link>
-                  <Link href="#" aria-label="Twitter">
-                    <TwitterIcon className="w-5 h-5 text-gray-600" />
-                  </Link>
-                  <Link href="#" aria-label="Instagram">
-                    <InstagramIcon className="w-5 h-5 text-gray-600" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          )}
+
         </div>
       </nav>
     </>
   );
 };
 
-export default Navbar;
+export default NavbarClient;

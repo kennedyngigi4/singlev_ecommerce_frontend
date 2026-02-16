@@ -12,7 +12,7 @@ const Orders = async () => {
     redirect("/login")
   }
 
-  const resp = await ApiRequests.get("orders/my-orders/", session?.sessionToken);
+  const resp = await ApiRequests.serverGet("orders/my-orders/", session?.sessionToken);
   console.log(resp);
 
   return (
