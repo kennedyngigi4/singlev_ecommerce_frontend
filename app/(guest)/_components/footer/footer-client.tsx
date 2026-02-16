@@ -9,7 +9,7 @@ const FooterClient = () => {
   return (
     <div className="container bg-qsecondary py-6 text-white flex flex-col space-y-5">
       
-      <div className="grid grid-cols-1 md:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
         <div>
           <h1 className="text-2xl font-bold">QUZA</h1>
 
