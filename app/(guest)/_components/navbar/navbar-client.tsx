@@ -56,7 +56,7 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
             
             {/* Mobile Menu Button */}
             <div
-              className="md:hidden p-2 rounded-md hover:bg-gray-100"
+              className="md:hidden rounded-md hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -72,17 +72,48 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
             </div>
 
 
-            {/* Shopping cart icon */}
-            <div className="md:hidden">
-              <Link href="/cart">
-                <Button variant="ghost" size="sm" className="relative cursor-pointer">
-                  <ShoppingCartIcon className="w-4 h-4 mr-2" />
-                  <span className="hidden lg:inline">Cart</span>
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                </Button>
-              </Link>
+            {/* Shopping cart + user icon */}
+            <div className="md:hidden flex">
+              <div>
+                <Link href="/cart">
+                  <Button variant="ghost" size="sm" className="relative cursor-pointer">
+                    <ShoppingCartIcon className="w-4 h-4 mr-2" />
+                    <span className="hidden lg:inline">Cart</span>
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+              <div>
+                {status !== "authenticated"
+                  ?
+                  <>
+                    <Link href="/login">
+
+                      <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer">
+                        <User className="w-4 h-4 mr-2" />
+                       
+                      </Button>
+                      <Button variant="ghost" size="sm" className="lg:hidden">
+                        <User className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                  </>
+                  : <>
+                    <Link href={session?.user?.role === "client" ? "/user" : `/${session?.user?.role}`} className="capitalize">
+
+                      <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer capitalize">
+                        <User className="w-4 h-4 mr-2" />
+                        
+                      </Button>
+                      <Button variant="ghost" size="sm" className="lg:hidden">
+                        <User className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                  </>
+                }
+              </div>
             </div>
 
             
