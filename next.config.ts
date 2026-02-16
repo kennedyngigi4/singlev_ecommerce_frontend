@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
         port: '8000',
         pathname: '/media/**',
       },
+
+      // production
+      {
+        protocol: 'https',
+        hostname: 'api.quza.co.ke',
+        pathname: '/media/**',
+      },
     ]
   },
 

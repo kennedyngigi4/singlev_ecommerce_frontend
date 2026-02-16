@@ -13,6 +13,7 @@ import { Field, FieldGroup, FieldSet } from '@/components/ui/field';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { AuthRequests } from '@/lib/requests/auth_requests';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -20,7 +21,7 @@ import { AuthRequests } from '@/lib/requests/auth_requests';
 
 
 const RegisterPage = () => {
-
+  const router = useRouter();
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -45,6 +46,7 @@ const RegisterPage = () => {
 
       if (res.success) {
         toast.success(res.message);
+        router.push("/login");
       } else {
         toast.error(res.message);
         return;
