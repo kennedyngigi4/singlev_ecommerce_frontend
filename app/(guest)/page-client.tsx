@@ -1,9 +1,9 @@
-import React from 'react'
+"use client"
 
+import React from 'react'
 import HeroSection from './_components/hero-section'
-import { ApiRequests } from '@/lib/requests/api_requests';
 import FeaturedSection from './_components/featured-section';
-import SidebarMenu from './_components/sidebar/sidebar-menu';
+import SidebarMenuClient from './_components/sidebar/sidebar-menu-client';
 
 
 
@@ -16,18 +16,19 @@ export const metadata = {
 
 export interface HomepageClientProps {
   featured: any;
+  categories: any;
 }
 
-const HomepageClient = async ({ featured  }: HomepageClientProps) => {
+const HomepageClient = ({ featured, categories  }: HomepageClientProps) => {
 
-  
+  console.log(featured);
 
   return (
     <div className="container py-6">
 
       <div className="flex gap-6">
         <div className="hidden md:block w-64 shrink-0">
-          <SidebarMenu />
+          <SidebarMenuClient categories={categories} />
         </div>
 
         <div className="flex-1 w-full overflow-hidden">
