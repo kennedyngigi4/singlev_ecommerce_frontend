@@ -31,7 +31,7 @@ export const productSchema = z.object({
     tags: z.string().optional(),
     
     // variant
-    price: z.string({ message: "Price is required." }),
+    price: z.string().optional(),
     discountprice: z.string().optional(),
     size: z.string().optional(),
     color: z.string().optional(),

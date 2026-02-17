@@ -55,19 +55,24 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
 
 
     const onProductUpdate = async(values: z.infer<typeof productSchema>) => {
-        console.log("values.....");
+        
         try {
             if (!session?.sessionToken) return;
-            console.log(values)
-            const resp = await ApiRequests.patch(`superadmin/products/products/${product.id}/`, session?.sessionToken, values);
+            const payload = {
+                ...values,
+                features: values.features ? [values.features] : [],
+                
+            }
+
+            const resp = await ApiRequests.patch(`superadmin/products/products/${product.id}/`, session?.sessionToken, payload);
             console.log(resp);
-            if(resp.success){
-                toast.success(resp.message);
+            if(resp){
+                toast.success("Product updated.");
             } else {
-                toast.error(resp.message);
+                toast.error("An error occured.");
             }
         } catch(e) {
-            return toast.error("A network error occured: "+e);
+            toast.error("A network error occured: "+e);
         }
     }
 
@@ -165,7 +170,7 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
                         </FieldSet>
 
                         <div>
-                            <Button type="submit" onClick={() => console.log("Button clicked")} className="cursor-pointer">Save changes</Button>
+                            <Button type="submit" className="cursor-pointer">Save changes</Button>
                         </div>
                     </form>
                 </div>

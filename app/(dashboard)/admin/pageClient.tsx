@@ -57,7 +57,7 @@ const PageClient = ({ stats }: PageClientProps) => {
                 <Card>
                     <CardContent>
                         <CardTitle>{stats.total_sales.toLocaleString()}</CardTitle>
-                        <CardDescription>Total Amount (KSh)</CardDescription>
+                        <CardDescription>Total Sales (KSh)</CardDescription>
                     </CardContent>
                 </Card>
             </div>

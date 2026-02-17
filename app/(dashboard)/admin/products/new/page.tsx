@@ -95,6 +95,13 @@ const NewProduct = () => {
 
   const onSubmit = async (values: z.infer<typeof productSchema>) => {
     setIsLoading(true);
+
+    if (!values.price) {
+      toast.error("Price is required");
+      setIsLoading(false);
+      return;
+    }
+
     try{
       if(!session?.sessionToken) return;
 
@@ -122,7 +129,7 @@ const NewProduct = () => {
       }
       
       const res = await ApiRequests.post("superadmin/products/products/", formData, session?.sessionToken);
-      console.log(res);
+      
       if(res.success){
         toast.success(res.message);
         router.push(`/admin/products/${res?.data}/`);

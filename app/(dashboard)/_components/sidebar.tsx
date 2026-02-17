@@ -8,6 +8,7 @@ import { LogOutIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 
@@ -44,10 +45,14 @@ const AppSidebar = ({ role }: AppSidebarProps) => {
       <SidebarHeader className="font-bold text-qprimary uppercase">
         {open 
           ? (<>
-            <Link href="/">QUZA</Link>
+            <Link href="/">
+              <Image src="/quza_logo.png" alt="QUZA KENYA | Kenya's leading online shopping" width={80} height={80} />
+            </Link>
           </>) 
           : (<>
-            <Link href="/">QM</Link>
+            <Link href="/">
+              <Image src="/icon.png" alt="QUZA KENYA | Kenya's leading online shopping" width={30} height={30} />
+            </Link>
           </>)
         }
         

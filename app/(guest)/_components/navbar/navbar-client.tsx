@@ -8,7 +8,7 @@ import { FacebookIcon, HelpCircleIcon, InstagramIcon, MenuIcon, SearchIcon, Shop
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import MenuDrawerClient from '../menu-drawer/menu-drawer-client';
-
+import Image from 'next/image';
 
 
 export interface NavbarClientProps {
@@ -69,7 +69,7 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
             {/* Logo - Hidden on medium screens when search is full width */}
             <div className="flex items-center md:hidden lg:flex">
               <Link href="/" className="text-3xl font-bold text-qprimary">
-                QUZA
+                <Image src="/quza_logo.png" alt="QUZA KENYA | Kenya's leading online shopping" width={150} height={100} className="w-24 md:w-32 lg:w-40 h-auto" priority />
               </Link>
             </div>
 

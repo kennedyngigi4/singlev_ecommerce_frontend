@@ -8,8 +8,7 @@ import PageClient from './pageClient';
 const AdminHomePage = async () => {
   const session = await auth();
 
-  const stats = await ApiRequests.get("superadmin/orders/stats/", session?.sessionToken);
-  console.log(stats);
+  const stats = await ApiRequests.serverGet("superadmin/orders/stats/", session?.sessionToken);
 
   return (
     <PageClient stats={stats} />

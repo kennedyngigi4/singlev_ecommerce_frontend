@@ -51,8 +51,8 @@ const ProductClient = ({ product }: ProductClientProps) => {
                 <div className="md:col-span-9">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-white rounded p-3">
                         <div className="md:col-span-4">
-                            <div className="relative h-full min-h-[300px]">
-                                <Image src={product?.thumbnail} alt={`${product?.name}`} fill className="object-cover" />
+                            <div className="relative h-full md:h-[270px]">
+                                <Image src={product?.thumbnail} alt={`QUZA Leading Online Shop in Kenya ${product?.name} available, ${product?.category} products available, ${product?.brand} available`} fill className="object-contain" />
                             </div>
                         </div>
                         <div className="md:col-span-8 relative">

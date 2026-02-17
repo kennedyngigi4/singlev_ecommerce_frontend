@@ -16,7 +16,7 @@ export const columns: ColumnDef<ProductCard>[] = [
             const thumbnail = row?.original.thumbnail;
 
             return (
-                <Image src={thumbnail} alt="image" width={80} height={80} />
+                <Image src={thumbnail} alt="image" width={40} height={40} />
             );
         }
     },
