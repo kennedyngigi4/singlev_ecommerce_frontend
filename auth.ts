@@ -25,7 +25,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         },
                         body: JSON.stringify(credentials),
                     });
-                    const data = await response.json();
+                    
+                    const text = await response.text();
+
+                    let data;
+                    try {
+                        data = JSON.parse(text);
+                    } catch {
+                        console.error("LOGIN API returned non-JSON:", text);
+                        throw new Error("Invalid server response.");
+                    }
                     
 
                     if(response.ok && data.success){
