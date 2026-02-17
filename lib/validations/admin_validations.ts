@@ -1,20 +1,33 @@
 import * as z from "zod";
 
+
+const fileSchema =
+    typeof window === "undefined"
+        ? z.any()
+        : z.instanceof(File);
+
+
 export const categorySchema = z.object({
-    name: z.string({message: "Category name is required."}),
+    name: z.string({ message: "Category name is required." }),
     parent: z.string().optional(),
-    thumbnail: z.instanceof(File).refine(file => file.size > 0, "Image/ logo is required.")
+    thumbnail: fileSchema.refine(
+        (file) => file && file.size > 0,
+        "Image/ logo is required."
+    )
 });
 
 export const brandSchema = z.object({
     name: z.string({ message: "Brand name is required." }),
-    image: z.instanceof(File).refine(file => file.size > 0, "Image/ logo is required.")
+    image: fileSchema.refine(
+        (file) => file && file.size > 0,
+        "Image/ logo is required."
+    )
 });
 
 
 
 export const variantSchema = z.object({
-    price: z.string({ message: "Price is required." }),
+    price: z.string().optional(),
     discountprice: z.string().optional(),
     size: z.string().optional(),
     color: z.string().optional(),
