@@ -11,12 +11,7 @@ type ProductDetailsProps = {
 }
 
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
-   
-
-
     const product = await ApiRequests.get(`products/${params.category}/${params.product}/`);
-
-    console.log(product)
 
     return (
         <ProductClient product={product} />

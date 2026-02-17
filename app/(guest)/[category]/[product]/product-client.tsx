@@ -9,6 +9,8 @@ import { useCartStore } from '@/store/cartStore';
 import { toast } from 'sonner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useWishStore } from '@/store/wishList';
+import { FaWhatsapp } from 'react-icons/fa';
+import Link from 'next/link';
 
 interface ProductClientProps {
     product: ProductData;
@@ -59,16 +61,25 @@ const ProductClient = ({ product }: ProductClientProps) => {
                                 <Button variant="ghost" onClick={() => onAddToWish(product)} className="cursor-pointer"><HeartIcon /></Button>
                             </div>
 
-                            <div className="pb-5">
+                            <div className="pb-3 pe-5">
                                 <h1 className="text-xl">{product?.name}</h1>
-                                <p className="text-slate-500">Brand: {product?.brand}</p>
+                                <p className="text-slate-500 text-sm">Brand: {product?.brand}</p>
+                                <p className="pb-5 text-slate-500 text-xs">{product?.category}</p>
                             </div>
-                            {/* <p className="pb-5">{product?.category}</p> */}
+                            
 
                             <p className="font-bold text-qsecondary mb-6">KSh {parseInt(product?.default_variant?.price).toLocaleString()}</p>
 
-                            <div>
+                            <div className='pb-5'>
+                                <p className="text-sm text-slate-500 line-clamp-4 text-ellipsis">{product?.description}</p>
+                            </div>
+                            <div className="flex space-x-3.5">
                                 <Button className='bg-qprimary cursor-pointer' onClick={() => onAddToCart(product)}><ShoppingCartIcon /> Add to Cart</Button>
+
+                                <Link href={`https://wa.me/254119439544/?text=Hello Quza, is ${product.name}, KSh ${parseInt(product?.default_variant?.price)} available?`} target="_blank">
+                                    <Button className='bg-green-600 hover:bg-green-800 cursor-pointer'><FaWhatsapp /> WhatsApp Enquiry</Button>
+                                </Link>
+                                
                             </div>
                         </div>
                     </div>

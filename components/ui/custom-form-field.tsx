@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from 'react';
-import { Field, FieldDescription, FieldError, FieldLabel } from './field';
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from './field';
 import { Input } from './input';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { FormFieldType } from '@/lib/form-fields-type';
 import { Select, SelectContent, SelectTrigger, SelectValue } from './select';
 import { Textarea } from './textarea';
+import { Checkbox } from './checkbox';
 
 interface CustomFormFieldProps{
     fieldType: string;
@@ -66,6 +67,18 @@ const RenderField = ({ field, state, props } : { field: any, state: any, props: 
                     placeholder={props.placeholder}
                     rows={15}
                 />
+            );
+
+        case FormFieldType.CHECKBOX:
+            return(
+                <FieldGroup>
+                    <Field orientation="horizontal">
+                        <Checkbox id={props.name} name={props.name} />
+                        <FieldLabel htmlFor="terms-checkbox-basic">
+                            {props.placeholder}
+                        </FieldLabel>
+                    </Field>
+                </FieldGroup>
             );
         default:
             return null;

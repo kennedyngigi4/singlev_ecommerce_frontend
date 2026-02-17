@@ -86,6 +86,7 @@ const MenuDrawerClient = ({ categories  }: MenuDrawerClientProps) => {
                                         </Button>
                                         <Button variant="ghost" size="sm" className="lg:hidden">
                                             <User className="w-4 h-4" />
+                                            {session?.user?.name}
                                         </Button>
                                     </Link>
                                 </>
