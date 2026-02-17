@@ -35,7 +35,7 @@ const MenuDrawerClient = ({ categories  }: MenuDrawerClientProps) => {
                     
                     <div>
                         <Link href="/" className="text-2xl font-bold text-qprimary">
-                            QUZA
+                            <Image src="/quza_logo.png" alt="QUZA KENYA | Kenya's leading online shopping" width={150} height={100} className="w-24 md:w-32 lg:w-40 h-auto" priority />
                         </Link>
                     </div>
                     
