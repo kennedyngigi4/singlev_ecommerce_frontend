@@ -20,7 +20,11 @@ const FooterClient = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
         <div>
-          <h1 className="text-2xl font-bold">QUZA</h1>
+          <div>
+            <Link href="/" className="text-3xl font-bold text-qprimary">
+              <Image src="/quza_footer_logo.png" alt="QUZA KENYA | Kenya's leading online shopping" width={150} height={100} className="w-24 md:w-32 lg:w-40 h-auto" priority />
+            </Link>
+          </div>
 
           <div className="flex items-center space-x-4 pt-12">
             <HeadsetIcon />
