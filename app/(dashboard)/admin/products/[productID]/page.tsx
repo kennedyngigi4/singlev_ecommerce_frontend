@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApiRequests } from '@/lib/requests/api_requests';
-import PageClient from './pageClient';
+import PageClient from './pageclient';
 import { auth } from '@/auth';
 
 type ProductDetailsProps = {
