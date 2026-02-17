@@ -21,7 +21,6 @@ export interface HomepageClientProps {
 
 const HomepageClient = ({ featured, categories  }: HomepageClientProps) => {
 
-  console.log(featured);
 
   return (
     <div className="container py-6">

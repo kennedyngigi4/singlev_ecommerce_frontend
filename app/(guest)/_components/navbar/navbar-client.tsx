@@ -20,7 +20,7 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
   const totalItems = useCartStore((state) => state.getTotalItems());
   const { data: session, status } = useSession();
 
-  console.log(categories);
+ 
 
   return (
     <>

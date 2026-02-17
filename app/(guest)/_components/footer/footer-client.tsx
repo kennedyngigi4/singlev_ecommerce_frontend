@@ -1,13 +1,22 @@
 "use client";
 
-import { HeadsetIcon } from 'lucide-react';
+import { FacebookIcon, HeadsetIcon } from 'lucide-react';
+import { FaWhatsapp } from "react-icons/fa";
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
 const FooterClient = () => {
   return (
-    <div className="container bg-qsecondary py-6 text-white flex flex-col space-y-5">
+    <div className="container bg-qsecondary py-6 text-white flex flex-col space-y-5 relative">
+
+      <div className="fixed -bottom-2 right-2 z-50 shadow-2xl">
+        <a href="https://wa.me/254119439544" target="_blank">
+          <div className="bg-green-500 p-1.5 rounded-full flex items-center justify-center text-sm">
+            <FaWhatsapp size={34} />
+          </div>
+        </a>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
         <div>
@@ -65,7 +74,7 @@ const FooterClient = () => {
         </div>
       </div>
       
-      <div className="w-full text-center pt-8 pb-5">
+      <div className="w-full text-center pt-8 pb-8">
         <p>&copy; 2026 <span className="font-extrabold">QUZA MAISHA LTD</span> | All Rights Reserved</p>
       </div>
     </div>

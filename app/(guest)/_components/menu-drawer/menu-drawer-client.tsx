@@ -32,23 +32,29 @@ const MenuDrawerClient = ({ categories  }: MenuDrawerClientProps) => {
                 <div className="p-6 space-y-4">
 
                     {/* Logo */}
-                    <div className="text-2xl font-bold text-qprimary">
-                        <Link href="/">QUZA</Link>
+                    
+                    <div>
+                        <Link href="/" className="text-2xl font-bold text-qprimary">
+                            QUZA
+                        </Link>
                     </div>
+                    
 
                     <div className="border-t pt-4 space-y-3">
 
 
                         <div className="flex flex-col justify-center items-start ps-1.5 pb-4 space-y-4 border-b-2 border-slate-100">
                             {categories.map((cat: any) => (
-                                <SheetClose asChild key={cat.id}>
-                                    <Link href={`/${cat.slug}`} className="flex">
-                                        <div className="relative h-[15px] w-[15px]">
-                                            <Image src={cat.thumbnail} alt={`QUZA ${cat.name} Online Shopping Nairobi, Kenya`} fill className="object-contain" />
-                                        </div>
-                                        <span className="ps-2.5 text-sm">{cat.name}</span>
-                                    </Link>
-                                </SheetClose>
+                                <div key={cat.id}>
+                                    <SheetClose asChild>
+                                        <Link href={`/${cat.slug}`} className="flex">
+                                            <div className="relative h-[15px] w-[15px]">
+                                                <Image src={cat.thumbnail} alt={`QUZA ${cat.name} Online Shopping Nairobi, Kenya`} fill className="object-contain" />
+                                            </div>
+                                            <span className="ps-2.5 text-sm">{cat.name}</span>
+                                        </Link>
+                                    </SheetClose>
+                                </div>
                             ))}
                             
                         </div>
