@@ -65,8 +65,8 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
             }
 
             const resp = await ApiRequests.patch(`superadmin/products/products/${product.id}/`, session?.sessionToken, payload);
-            console.log(resp);
-            if(resp){
+            
+            if(resp.success){
                 toast.success("Product updated.");
             } else {
                 toast.error("An error occured.");

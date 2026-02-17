@@ -13,9 +13,9 @@ export const ApiRequests = {
                 headers: headers,
                 body: isFormData ? data : JSON.stringify(data),
             });
-            const res = await response.json();
+            const res = await safeParseJSON(response);
 
-            if(!response.ok && res.errors){
+            if(!response.ok){
                 return { success: false, message: res.errors}
             }
 
@@ -35,12 +35,13 @@ export const ApiRequests = {
 
             const response = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/${url}`, {
                 method: "GET",
-                headers: headers
+                headers: headers,
+                cache: "no-store"
             });
-            const res = await response.json();
+            const res = await safeParseJSON(response);
 
             if (!response.ok) {
-                return { succes: false, message: res?.errors || "Request failed." }
+                return { success: false, message: res?.errors || "Request failed." }
             }
 
             return res;
@@ -57,12 +58,13 @@ export const ApiRequests = {
 
             const response = await fetch(`${process.env.APIURL}/${url}`, {
                 method: "GET",
-                headers: headers
+                headers: headers,
+                cache: "no-store"
             });
-            const res = await response.json();
+            const res = await safeParseJSON(response);
 
             if (!response.ok) {
-                return { succes: false, message: res?.errors || "Request failed." }
+                return { success: false, message: res?.errors || "Request failed." }
             }
 
             return res;
@@ -87,9 +89,9 @@ export const ApiRequests = {
                 headers: headers,
                 body: isFormData ? data : JSON.stringify(data),
             });
-            const res = await response.json();
+            const res = await safeParseJSON(response);
 
-            if (!response.ok && res.errors) {
+            if (!response.ok) {
                 return { success: false, message: res.errors }
             }
 
@@ -111,4 +113,17 @@ export const ApiRequests = {
 
 
 }
+
+
+async function safeParseJSON(response: Response) {
+    const text = await response.text();
+
+    try {
+        return JSON.parse(text);
+    } catch {
+        console.error("Non-JSON API response:", text);
+        return null;
+    }
+}
+
 
