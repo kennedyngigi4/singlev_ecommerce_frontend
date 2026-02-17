@@ -11,10 +11,16 @@ type ProductDetailsProps = {
 }
 
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
-    const product = await ApiRequests.get(`products/${params.category}/${params.product}/`);
+
+    const { category, product } = params;
+    const productData = await ApiRequests.get(`products/${category}/${product}/`);
+
+    if (!productData) {
+        return <div className="w-full h-screen justify-center items-center">Failed to load product data.</div>;
+    }
 
     return (
-        <ProductClient product={product} />
+        <ProductClient productData={productData} />
     )
 }
 

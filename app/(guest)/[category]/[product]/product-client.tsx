@@ -13,10 +13,10 @@ import { FaWhatsapp } from 'react-icons/fa';
 import Link from 'next/link';
 
 interface ProductClientProps {
-    product: ProductData;
+    productData: ProductData;
 }
 
-const ProductClient = ({ product }: ProductClientProps) => {
+const ProductClient = ({ productData }: ProductClientProps) => {
 
     const addToCart = useCartStore((state) => state.addToCart);
     const addToWishList = useWishStore((state) => state.addToWish);

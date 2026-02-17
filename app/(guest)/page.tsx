@@ -9,13 +9,6 @@ import { ApiRequests } from '@/lib/requests/api_requests';
 
 
 
-// export const metadata = {
-//   title: "Quza Kenya | Online Shopping for Electronics, Phones, Tablets & Accessories, Laptops & Computers, Home & Office, TVs & Audio, Water Harvesting, Baby products",
-//   description: 'Buy electronics, fashion & groceries online in Kenya',
-// }
-
-
-
 const HomepageClient = () => {
 
   const [featured, setFeatured] = useState([]);

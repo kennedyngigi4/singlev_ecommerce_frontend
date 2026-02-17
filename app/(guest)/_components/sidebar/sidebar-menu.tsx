@@ -4,10 +4,12 @@ import { ApiRequests } from '@/lib/requests/api_requests';
 
 const SidebarMenu = async() => {
 
-    const categories = await fetch(
-        `${process.env.APIURL}/products/categories/`,
-        { cache: "no-store" }
-    ).then(res => res.json());
+    const categories = await ApiRequests.serverGet('products/categories/');
+
+    if (!categories || categories.success === false) {
+        console.error('Failed to load categories:', categories);
+        return <SidebarMenuClient categories={[]} />; // fallback UI
+    }
 
    
 
