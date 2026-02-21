@@ -11,7 +11,7 @@ const FooterClient = () => {
     <div className="container bg-qsecondary py-6 text-white flex flex-col space-y-5 relative">
 
       <div className="fixed -bottom-2 right-2 z-50 shadow-2xl">
-        <a href="https://wa.me/254119439544" target="_blank">
+        <a href="https://wa.me/254119441639" target="_blank">
           <div className="bg-green-500 p-1.5 rounded-full flex items-center justify-center text-sm">
             <FaWhatsapp size={34} />
           </div>
@@ -70,11 +70,22 @@ const FooterClient = () => {
           </ul>
         </div>
         <div>
-          <h1 className="font-bold pb-3 uppercase">Download QUZA Free App</h1>
+          <h1 className="font-bold pb-3 uppercase">Business</h1>
 
-          <Link href="" className="">
-            <Image src="/others/google-app.png" alt="QUZA" width={150} height={50} />
-          </Link>
+          <ul className="flex flex-col space-y-2">
+            <Link href="">
+              Want to sell on Quza?
+            </Link>
+            <Link href="">
+              Advertise on Quza
+            </Link>
+            <Link href="">
+              Flash Sales
+            </Link>
+            <Link href="">
+              Quza business help centre
+            </Link>
+          </ul>
         </div>
       </div>
       

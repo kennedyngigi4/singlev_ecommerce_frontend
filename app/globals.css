@@ -157,17 +157,17 @@
 
   @media (min-width: 640px) {
     .container {
-      padding-inline: 1.5rem;
+      padding-inline: 0.5rem;
     }
 
     .container-fluid {
-      padding-inline: 0.5rem;
+      padding-inline: 0rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-inline: 3rem;
+      padding-inline: 3.0rem;
     }
 
     .container-fluid {

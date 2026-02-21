@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCartStore } from '@/store/cartStore';
-import { FacebookIcon, HelpCircleIcon, InstagramIcon, MenuIcon, SearchIcon, ShoppingCartIcon, TwitterIcon, User, XIcon } from 'lucide-react';
+import { FacebookIcon, HelpCircleIcon, InstagramIcon, PhoneIcon, SearchIcon, ShoppingCartIcon, Smartphone, TwitterIcon, User, XIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import MenuDrawerClient from '../menu-drawer/menu-drawer-client';
@@ -29,12 +29,13 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
         <div className="container py-1.5">
           <div className="flex justify-between items-center">
             <div className="flex-1">
-              <p className="text-sm text-white">Welcome to Quza Online Shopping</p>
+              <p className="flex items-center space-x-1 text-sm text-white"><Smartphone size={14} /> <span>Download App</span></p>
+            </div>
+            <div className="flex-1">
+              <p className="flex items-center space-x-1 text-sm text-white font-semibold">Latest Offers on Quza</p>
             </div>
             <div className="flex items-center space-x-6">
-              <Link href="/track-order" className="text-sm text-white hover:text-qsecondary transition-colors">
-                Track Your Order
-              </Link>
+              <p className="flex items-center space-x-1 text-sm text-white "><PhoneIcon size={15} /> <span>+254 119 439544</span></p>
               <div className="flex items-center space-x-4">
                 <Link href="#" aria-label="Facebook">
                   <FacebookIcon className="w-4 h-4 text-white hover:text-qsecondary transition-colors" />

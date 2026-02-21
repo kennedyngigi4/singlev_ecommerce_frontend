@@ -76,7 +76,7 @@ const ProductClient = ({ productData }: ProductClientProps) => {
                             <div className="flex space-x-3.5">
                                 <Button className='bg-qprimary cursor-pointer' onClick={() => onAddToCart(productData)}><ShoppingCartIcon /> Add to Cart</Button>
 
-                                <Link href={`https://wa.me/254119439544/?text=Hello Quza, is ${productData.name}, KSh ${parseInt(productData?.default_variant?.price)} available?`} target="_blank">
+                                <Link href={`https://wa.me/254119441639/?text=Hello Quza, is ${productData.name}, KSh ${parseInt(productData?.default_variant?.price)} available?`} target="_blank">
                                     <Button className='bg-green-600 hover:bg-green-800 cursor-pointer'><FaWhatsapp /> WhatsApp Enquiry</Button>
                                 </Link>
                                 
