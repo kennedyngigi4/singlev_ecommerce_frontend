@@ -1,7 +1,9 @@
 "use client";
 
-import { DiamondIcon, Gem, HeadsetIcon, ShieldCheckIcon, StarsIcon, Truck } from 'lucide-react';
 import React from 'react';
+import { Gem, HeadsetIcon, ShieldCheckIcon, Truck } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const featuresList = [
     {
@@ -24,12 +26,6 @@ const featuresList = [
     },
     {
         id: 4,
-        icon: StarsIcon,
-        title: "Premium quality at fair prices",
-        subtitle: "We cut out middlemen to give you the best value for your money."
-    },
-    {
-        id: 5,
         icon: HeadsetIcon,
         title: "We’re here for you",
         subtitle: "Responsive support team ready to assist before and after your purchase."
@@ -42,10 +38,10 @@ const features = featuresList;
 
   return (
     <div className="flex flex-col space-y-5">
-        <div className="hidden md:grid md:grid-cols-5 gap-4">
+        <div className="hidden md:grid md:grid-cols-4 gap-5">
             {features.map((feature) => (
                 <div key={feature.id} className="flex flex-col justify-center items-center p-2 bg-white rounded-2xl shadow">
-                    <feature.icon size={40} />
+                    <feature.icon size={65} className="text-slate-500 py-4" />
 
                     <div className="flex flex-col items-center">
                         <h2 className="font-semibold text-qprimary text-sm text-center">{feature.title}</h2>
@@ -53,9 +49,31 @@ const features = featuresList;
                     </div>
                 </div>
             ))}
-            
+        </div>
 
-
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 py-6">
+            <div className="md:col-span-3">
+                <Link href="/" className="text-3xl font-bold text-qprimary">
+                    <Image src="/quza_logo.png" alt="QUZA KENYA | Kenya's leading online shopping" width={190} height={150} className="w-24 md:w-38 lg:w-40 h-auto" priority />
+                </Link>
+            </div>
+            <div className="md:col-span-6">
+                <div>
+                    <h1 className="font-semibold">New to Quza?</h1>
+                    <p className="text-sm text-slate-500">Subscribe to our newsletter to get updates on our latest offers!</p>
+                </div>
+            </div>
+            <div className="md:col-span-3">
+                <div className="flex space-x-3">
+                    
+                    <div>
+                        <h1 className="font-bold pb-3">DOWNLOAD QUZA FREE APP</h1>
+                        <Link href="/" className="text-3xl font-bold text-qprimary">
+                            <Image src="/others/google-app.png" alt="QUZA KENYA | Kenya's leading online shopping" width={190} height={150} className="w-24 md:w-38 lg:w-40 h-auto" priority />
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
   )

@@ -33,9 +33,9 @@ const HomepageClient = () => {
   }, []);
 
   return (
-    <div className="container py-6">
+    <div className="pt-6">
 
-      <div className="flex gap-6">
+      <div className="flex container gap-6">
         <div className="hidden md:block w-64 shrink-0">
           <SidebarMenuClient categories={categories} />
         </div>
@@ -81,13 +81,16 @@ const HomepageClient = () => {
       </div>
 
 
-      <div className="mt-5">
+      <div className="mt-5 container">
         <FeaturedSection items={featured} />
       </div>
 
 
-      <div className="mt-12">
-        <CompanySection />
+      <div className="mt-12 py-8 bg-qsecondary/10">
+        <div className="container">
+          <CompanySection />
+        </div>
+        
       </div>
 
     </div>
