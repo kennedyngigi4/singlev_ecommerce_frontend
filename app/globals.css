@@ -145,9 +145,10 @@
 
 @layer components {
   .container {
-    max-width: var(--container-max-width);
+    width: 100%;
+    max-width: 1280px;
     margin-inline: auto;
-    padding-inline: 0.5rem;
+    padding-inline: 1rem;
   }
 
   .container-fluid {
