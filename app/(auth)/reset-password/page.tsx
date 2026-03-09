@@ -51,7 +51,9 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                 password: values.password1,
             }
 
-            const resp = await ApiRequests.post("account/reset-password/", payload);
+            console.log(payload);
+
+            const resp = await ApiRequests.post("account/password-reset-confirm/", payload);
             console.log(resp);
 
         } catch (err) {
