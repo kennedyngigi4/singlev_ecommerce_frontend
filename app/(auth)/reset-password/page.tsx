@@ -14,8 +14,14 @@ import { toast } from 'sonner'
 import { ApiRequests } from '@/lib/requests/api_requests'
 import { useSearchParams } from 'next/navigation'
 
+type PageProps = {
+    searchParams: {
+        uid?: string
+        token?: string
+    }
+}
 
-const ResetPassword = () => {
+const ResetPassword = ({ searchParams }: PageProps) => {
     const [ isLoading, setIsLoading ] = useState(false);
 
     const form = useForm({
@@ -26,10 +32,8 @@ const ResetPassword = () => {
         }
     });
 
-    const searchParams = useSearchParams()
-
-    const uid = searchParams.get("uid")
-    const token = searchParams.get("token")
+    const uid = searchParams.uid;
+    const token = searchParams.token;
 
     const onSubmit = async(values: z.infer<typeof resetPasswordSchema>) => {
 
