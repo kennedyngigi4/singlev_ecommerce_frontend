@@ -10,6 +10,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { resetPasswordSchema } from '@/lib/validations/validations'
 import * as z from "zod";
+import { toast } from 'sonner'
+import { ApiRequests } from '@/lib/requests/api_requests'
+import { useSearchParams } from 'next/navigation'
 
 
 const ResetPassword = () => {
@@ -23,13 +26,32 @@ const ResetPassword = () => {
         }
     });
 
+    const searchParams = useSearchParams()
+
+    const uid = searchParams.get("uid")
+    const token = searchParams.get("token")
+
     const onSubmit = async(values: z.infer<typeof resetPasswordSchema>) => {
+
+        if(values.password1 !== values.password2){
+            toast.error("Passwords do not match");
+            return;
+        }
+
         try {
             setIsLoading(true);
+            
+            const payload = {
+                uid: uid,
+                token: token,
+                password: values.password1,
+            }
 
+            const resp = await ApiRequests.post("account/reset-password/", payload);
+            console.log(resp);
 
         } catch (err) {
-
+            toast.error("A network error occured.");
         } finally {
             setIsLoading(false);
         }
