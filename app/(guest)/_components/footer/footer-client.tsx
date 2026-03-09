@@ -91,8 +91,9 @@ const FooterClient = () => {
           </div>
         </div>
         
-        <div className="w-full text-center pt-8 pb-8">
+        <div className="w-full flex justify-between text-center pt-8 pb-8">
           <p>&copy; 2026 <span className="font-extrabold">QUZA MAISHA LTD</span> | All Rights Reserved</p>
+          <Image src="/others/mpesa.png" alt="" width={60} height={60} />
         </div>
       </div>
     </div>

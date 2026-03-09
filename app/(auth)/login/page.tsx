@@ -117,7 +117,7 @@ const LoginPage = () => {
           </form>
 
           <div className='flex flex-col items-center pt-8 space-y-6'>
-            <Link href="/reset-password" className="text-qprimary text-sm">Forgot your Password?</Link>
+            <Link href="/forgot-password" className="text-qprimary text-sm">Forgot your Password?</Link>
 
             <p className="text-sm">Don't have an account yet? <Link href="/register" className="text-qprimary">Register</Link></p>
           </div>

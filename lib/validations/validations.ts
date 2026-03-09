@@ -30,6 +30,16 @@ export const orderPaymentSchema = z.object({
     mpesa_number: z.string().min(10, "Mpesa number is required"),
     order_id: z.string().min(8, "Order ID is required"),
     total_amount: z.string().min(1, "Amount is required"),
+});
+
+
+export const forgotPasswordSchema = z.object({
+    email: z.email("Invalid email address")
 })
 
+
+export const resetPasswordSchema = z.object({
+    password1: z.string().min(8, "Password must be at least 8 characters."),
+    password2: z.string().min(8, "Password must be at least 8 characters."),
+})
 
