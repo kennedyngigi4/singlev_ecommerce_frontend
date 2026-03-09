@@ -83,7 +83,7 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                                 <CustomFormField
                                     label="Password"
                                     fieldType="input"
-                                    name="password"
+                                    name="password1"
                                     inputType="password"
                                     control={form.control}
                                     placeholder="e.g ********"
@@ -92,7 +92,7 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                                 <CustomFormField
                                     label="Confirm Password"
                                     fieldType="input"
-                                    name="password"
+                                    name="password2"
                                     inputType="password"
                                     control={form.control}
                                     placeholder="e.g ********"
