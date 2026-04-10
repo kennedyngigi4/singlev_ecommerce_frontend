@@ -4,7 +4,7 @@ module.exports = {
             name: "quza-web",
             script: "node_modules/next/dist/bin/next",
             args: ["start", "-p", "3000"],
-            cwd: "/home/peter/qm/frontend",
+            cwd: "/home/quza.co.ke/public_html",
             instances: 1,
             exec_mode: "fork",
             interpreter: "node",
