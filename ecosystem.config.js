@@ -11,6 +11,13 @@ module.exports = {
             max_memory_restart: "500M",
             env: {
                 NODE_ENV: "production",
+                AUTH_SECRET: "D1t3xqOOkwh/eq43es1/y632HvAotajjhhQcBia2Hoc=",
+                AUTH_TRUST_HOST: "true",
+                AUTH_URL: "https://quza.co.ke",
+                NEXTAUTH_URL: "https://quza.co.ke",
+                APIURL: "https://api.quza.co.ke/v1",
+                NEXT_PUBLIC_BASEURL: "https://api.quza.co.ke",
+                NEXT_PUBLIC_APIURL: "https://api.quza.co.ke/v1",
             },
         },
     ],
