@@ -27,16 +27,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
 
-
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "https://api.quza.co.ke/:path*",
-      },
-    ];
-  },
-
 };
 
 export default nextConfig;
