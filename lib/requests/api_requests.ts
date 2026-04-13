@@ -33,10 +33,13 @@ export const ApiRequests = {
             const headers: Record<string, any> = {};
             if(token) headers["Authorization"] = `Bearer ${token}`;
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/${url}`, {
+            const base = process.env.NEXT_PUBLIC_APIURL?.replace(/\/$/, "");
+            const path = url.replace(/^\//, "");
+
+            const response = await fetch(`${base}/${path}`, {
                 method: "GET",
                 headers: headers,
-                cache: "no-store"
+               
             });
             const res = await safeParseJSON(response);
 
