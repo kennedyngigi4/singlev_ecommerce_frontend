@@ -15,20 +15,28 @@ import CompanySection from './_components/company-section';
 
 const HomepageClient = () => {
 
-  const [featured, setFeatured] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [featured, setFeatured] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const feat = await ApiRequests.get("products/home/");
-        setFeatured(feat);
-        const cat = await ApiRequests.get("products/categories/");
-        setCategories(cat);
+        const featRes = await fetch("https://api.quza.co.ke/v1/products/home/");
+        const featData = await featRes.json();
+
+        const catRes = await fetch("https://api.quza.co.ke/v1/products/categories/");
+        const catData = await catRes.json();
+
+        setFeatured(Array.isArray(featData) ? featData : []);
+        setCategories(Array.isArray(catData) ? catData : []);
+
       } catch (err) {
-        console.error(err);
+        console.error("Fetch error:", err);
+        setFeatured([]);
+        setCategories([]);
       }
     }
+
     fetchData();
   }, []);
 

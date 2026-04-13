@@ -39,7 +39,7 @@ export const ApiRequests = {
             const response = await fetch(`${base}/${path}`, {
                 method: "GET",
                 headers: headers,
-               
+                
             });
             const res = await safeParseJSON(response);
 
