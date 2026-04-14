@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export interface SidebarMenuClientProps {
-    categories: any;
+    categories: any[];
 }
 
 export default function SidebarMenuClient({ categories }: SidebarMenuClientProps) {
