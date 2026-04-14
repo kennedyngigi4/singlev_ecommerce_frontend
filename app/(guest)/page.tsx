@@ -21,14 +21,14 @@ const HomepageClient = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const featRes = await fetch("https://api.quza.co.ke/v1/products/home/");
-        const featData = await featRes.json();
+        const featRes = await ApiRequests.get("products/home/");
+        const catRes = await ApiRequests.get("products/categories/");
 
-        const catRes = await fetch("https://api.quza.co.ke/v1/products/categories/");
-        const catData = await catRes.json();
-
-        setFeatured(Array.isArray(featData) ? featData : []);
-        setCategories(Array.isArray(catData) ? catData : []);
+        console.log("FEATURED:", featRes);
+        console.log("CATEGORIES:", catRes);
+      
+        setFeatured(Array.isArray(featRes) ? featRes : []);
+        setCategories(Array.isArray(catRes) ? catRes : []);
 
       } catch (err) {
         console.error("Fetch error:", err);

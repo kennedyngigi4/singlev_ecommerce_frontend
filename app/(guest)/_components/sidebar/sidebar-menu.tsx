@@ -2,25 +2,19 @@ import React from 'react'
 import SidebarMenuClient from './sidebar-menu-client'
 import { ApiRequests } from '@/lib/requests/api_requests';
 
-const SidebarMenu = async () => {
-    
-    const res = await fetch("https://api.quza.co.ke/v1/products/categories/", {
-        cache: "no-store",
-    });
+const SidebarMenu = async() => {
 
-    if (!res.ok) {
-        console.error("Failed to fetch categories:", res.status);
+    const categories = await ApiRequests.serverGet('products/categories/');
+
+    if (!categories || !Array.isArray(categories)) {
+        console.error("Failed to load categories:", categories);
         return <SidebarMenuClient categories={[]} />;
     }
 
-    const catData = await res.json();
 
-    if (!Array.isArray(catData)) {
-        console.error("Invalid categories format:", catData);
-        return <SidebarMenuClient categories={[]} />;
-    }
-
-    return <SidebarMenuClient categories={catData} />;
+    return (
+        <SidebarMenuClient categories={categories} />
+    );
 }
 
 export default SidebarMenu
