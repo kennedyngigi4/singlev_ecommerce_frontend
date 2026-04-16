@@ -16,7 +16,7 @@ export const ApiRequests = {
             const res = await safeParseJSON(response);
 
             if(!response.ok){
-                return { success: false, message: res.errors}
+                return { success: false, message: res?.errors || "Unknown error" }
             }
 
             return res;
@@ -99,7 +99,7 @@ export const ApiRequests = {
             const res = await safeParseJSON(response);
 
             if (!response.ok) {
-                return { success: false, message: res.errors }
+                return { success: false, message: res.errors || "Unknown error" }
             }
 
             return res;
@@ -129,8 +129,9 @@ async function safeParseJSON(response: Response) {
         return JSON.parse(text);
     } catch {
         console.error("Non-JSON API response:", text);
-        return null;
+        return { raw: text};
     }
 }
+
 
 
