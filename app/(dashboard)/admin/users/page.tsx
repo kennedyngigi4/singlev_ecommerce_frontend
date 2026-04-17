@@ -9,7 +9,7 @@ const UsersPage = async() => {
   const session = await auth();
 
   const users = await ApiRequests.get("superadmin/users/all/", session?.sessionToken);
-  console.log(users);
+ 
 
   return (
     <div>
