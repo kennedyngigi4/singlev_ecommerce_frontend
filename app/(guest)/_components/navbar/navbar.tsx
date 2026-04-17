@@ -7,7 +7,6 @@ const Navbar = async () => {
   const categories = await ApiRequests.serverGet('products/categories/');
 
   if (!categories || categories.success === false) {
-    console.error('Failed to load categories:', categories);
     return <NavbarClient categories={[]} />; // fallback UI
   }
   

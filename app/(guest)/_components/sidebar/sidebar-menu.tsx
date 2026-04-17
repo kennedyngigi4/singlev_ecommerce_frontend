@@ -7,7 +7,6 @@ const SidebarMenu = async() => {
     const categories = await ApiRequests.serverGet('products/categories/');
 
     if (!categories || !Array.isArray(categories)) {
-        console.error("Failed to load categories:", categories);
         return <SidebarMenuClient categories={[]} />;
     }
 
