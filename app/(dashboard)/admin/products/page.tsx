@@ -18,7 +18,6 @@ const ProductsPage = () => {
   useEffect(() => {
     const fetchProducts = async() => {
       const res = await ApiRequests.get("superadmin/products/products/", session?.sessionToken);
-      console.log(res);
       setProducts(res);
     }
     fetchProducts();

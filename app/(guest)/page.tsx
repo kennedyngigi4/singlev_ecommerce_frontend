@@ -23,15 +23,12 @@ const HomepageClient = () => {
       try {
         const featRes = await ApiRequests.get("products/home/");
         const catRes = await ApiRequests.get("products/categories/");
-
-        console.log("FEATURED:", featRes);
-        console.log("CATEGORIES:", catRes);
       
         setFeatured(Array.isArray(featRes) ? featRes : []);
         setCategories(Array.isArray(catRes) ? catRes : []);
 
       } catch (err) {
-        console.error("Fetch error:", err);
+        
         setFeatured([]);
         setCategories([]);
       }

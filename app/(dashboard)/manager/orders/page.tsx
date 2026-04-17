@@ -8,7 +8,6 @@ const OrdersPage = async () => {
   const session = await auth();
   const orders = await ApiRequests.serverGet("manager/all-orders/", session?.sessionToken);
 
-  console.log(JSON.stringify(orders, null, 2))
 
   return (
     <div className="flex flex-col space-y-4 bg-white p-5">

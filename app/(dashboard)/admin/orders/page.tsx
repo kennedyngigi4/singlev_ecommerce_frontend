@@ -10,7 +10,6 @@ const OrdersPage = async () => {
 
   const orders = await ApiRequests.get("superadmin/orders/all-orders/", session?.sessionToken);
 
-  console.log(orders);
 
   return (
     <div>
