@@ -6,14 +6,14 @@ import { DataTable } from './_components/data-table';
 import { columns } from './_components/columns';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Product } from '@/lib/models/products';
+import { ProductData } from '@/lib/models/products';
 import { ApiRequests } from '@/lib/requests/api_requests';
 
 const ProductsPage = () => {
 
   const { data:session } = useSession();
   const router = useRouter();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductData[]>([]);
 
   useEffect(() => {
     const fetchProducts = async() => {
