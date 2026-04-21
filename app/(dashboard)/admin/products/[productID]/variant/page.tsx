@@ -48,9 +48,9 @@ const ProductVariant = () => {
         "product": params.productID,
       }
 
-      console.log(payload);
+      
       const resp = await ApiRequests.post("superadmin/products/add-variant/", payload, session?.sessionToken);
-      console.log(resp)
+      
       if(resp.success){
         toast.success(resp.message);
         router.push(`/admin/products/${params.productID}/`);

@@ -12,7 +12,7 @@ const SalesHomePage = async() => {
   if (!session?.sessionToken) return;
 
   const stats = await ApiRequests.get("manager/stats/", session?.sessionToken);
-  console.log(stats)
+  
 
   return (
     <div className="flex flex-col space-y-5">

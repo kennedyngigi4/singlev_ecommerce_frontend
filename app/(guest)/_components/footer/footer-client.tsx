@@ -40,10 +40,10 @@ const FooterClient = () => {
           <div>
             <h1 className="font-bold pb-3">Company</h1>
             <ul className="flex flex-col space-y-2">
-              <Link href="">
+              <Link href="/about-us">
                 About Us
               </Link>
-              <Link href="">
+              <Link href="/return-policy">
                 Returns and Refunds Policy
               </Link>
               <Link href="">

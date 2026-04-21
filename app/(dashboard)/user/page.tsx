@@ -14,18 +14,6 @@ const ClientHomePage = async () => {
   
   const user = await getUserProfile();
 
-  
-
-  // useEffect(() => {
-  //   if(status !== "authenticated") return;
-
-  //   if (session?.user?.role !== "client") {
-  //     router.replace("/login");
-  //   }
-  // }, [status, session, router]);
-
-
-
   return (
     <div className="flex flex-col space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

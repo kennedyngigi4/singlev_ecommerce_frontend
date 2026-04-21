@@ -55,11 +55,11 @@ const LoginPage = () => {
     try {
       const res = await AuthRequests.login(values.email, values.password);
 
-      console.log(res);
+      
 
       if (res.success) {
         toast.success("Login successful.");
-        // router.push("/admin");
+       
       } else {
         toast.error(res.message);
       }
