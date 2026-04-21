@@ -8,7 +8,10 @@ export const ApiRequests = {
             if(token) headers["Authorization"] = `Bearer ${token}`;
             if(!isFormData) headers["Content-Type"] = "application/json";
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/${url}`, {
+            const base = process.env.NEXT_PUBLIC_APIURL?.replace(/\/$/, "");
+            const path = url.replace(/^\//, "");
+
+            const response = await fetch(`${base}/${path}`, {
                 method: "POST",
                 headers: headers,
                 body: isFormData ? data : JSON.stringify(data),
@@ -16,7 +19,7 @@ export const ApiRequests = {
             const res = await safeParseJSON(response);
 
             if(!response.ok){
-                return { success: false, message: res?.errors || "Unknown error" }
+                return { success: false, message: res?.errors || res?.detail || "Unknown error" };
             }
 
             return res;
@@ -44,7 +47,7 @@ export const ApiRequests = {
             const res = await safeParseJSON(response);
 
             if (!response.ok) {
-                return { success: false, message: res?.errors || "Request failed." }
+                return { success: false, message: res?.errors || res?.detail || "Request failed." };
             }
 
             return res;
@@ -71,7 +74,7 @@ export const ApiRequests = {
             const res = await safeParseJSON(response);
 
             if (!response.ok) {
-                return { success: false, message: res?.errors || "Request failed." }
+                return { success: false, message: res?.errors || res?.detail || "Request failed." };
             }
 
             return res;
@@ -91,7 +94,10 @@ export const ApiRequests = {
             if (token) headers["Authorization"] = `Bearer ${token}`;
             if (!isFormData) headers["Content-Type"] = "application/json";
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/${url}`, {
+            const base = process.env.NEXT_PUBLIC_APIURL?.replace(/\/$/, "");
+            const path = url.replace(/^\//, "");
+
+            const response = await fetch(`${base}/${path}`, {
                 method: "PATCH",
                 headers: headers,
                 body: isFormData ? data : JSON.stringify(data),
@@ -99,7 +105,7 @@ export const ApiRequests = {
             const res = await safeParseJSON(response);
 
             if (!response.ok) {
-                return { success: false, message: res.errors || "Unknown error" }
+                return { success: false, message: res?.errors || res?.detail || "Unknown error" };
             }
 
             return res;

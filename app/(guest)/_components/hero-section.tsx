@@ -10,6 +10,7 @@ const HeroSection = () => {
             src="/slides/1.gif"
             alt="QUZA ONLINE SHOPPING in Nairobi, Kenya"
             fill
+            unoptimized
             priority
             className="object-cover"
         />
