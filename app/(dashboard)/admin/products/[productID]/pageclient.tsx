@@ -82,7 +82,9 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 bg-white p-4">
 
                 <div className="md:col-span-2">
-                    <Image src={product.thumbnail} alt={`${product.name}`} width={100} height={100} />
+                    {product.thumbnail && (
+                        <Image src={product.thumbnail} alt={`${product.name}`} width={100} height={100} />
+                    )}
                 </div>
 
                 <div className="md:col-span-6">
@@ -186,9 +188,17 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
                     </Link>
                     
                 </div>
-                <div>
-                    <DataTable columns={columns} data={product?.variants} />
-                </div>
+            
+                {product?.variants ? (
+                    <div>
+                        <DataTable columns={columns} data={product?.variants} />
+                    </div>
+                ) : (
+                    <div>
+                        <p className="text-center py-5">No variants</p>
+                    </div>
+                )}
+                
             </div>
 
 

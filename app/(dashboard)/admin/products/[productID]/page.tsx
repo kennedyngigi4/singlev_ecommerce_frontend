@@ -17,6 +17,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
   
 
   const product = await ApiRequests.get(`superadmin/products/products/${productID}/`, session?.sessionToken);
+  
   const [categories, brands, featuresList] = await Promise.all([
     ApiRequests.get("superadmin/products/category-children/", session.sessionToken),
     ApiRequests.get("products/brands/", session.sessionToken),
