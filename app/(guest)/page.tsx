@@ -91,7 +91,7 @@ const HomepageClient = () => {
       </div>
 
 
-      <div className="mt-12 py-8 bg-qsecondary/10">
+      <div className="mt-12 py-8 bg-blue-50">
         <div className="container">
           <CompanySection />
         </div>
