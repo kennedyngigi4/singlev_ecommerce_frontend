@@ -18,11 +18,13 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
 
   const product = await ApiRequests.get(`superadmin/products/products/${productID}/`, session?.sessionToken);
   
-  const [categories, brands, featuresList] = await Promise.all([
-    ApiRequests.get("superadmin/products/category-children/", session.sessionToken),
-    ApiRequests.get("products/brands/", session.sessionToken),
-    ApiRequests.get("products/features/", session.sessionToken),
-  ]);
+  const categoriesResp = await ApiRequests.get("superadmin/products/category-children/", session.sessionToken);
+  const brandsResp = await ApiRequests.get("products/brands/", session.sessionToken);
+  const featuresResp = await ApiRequests.get("products/features/", session.sessionToken);
+
+  const categories = Array.isArray(categoriesResp) ? categoriesResp : categoriesResp?.results ?? [];
+  const brands = Array.isArray(brandsResp) ? brandsResp : brandsResp?.results ?? [];
+  const featuresList = Array.isArray(featuresResp) ? featuresResp : featuresResp?.results ?? [];
           
  
   

@@ -33,6 +33,7 @@ export const variantSchema = z.object({
     color: z.string().optional(),
     stock: z.string().optional(),
     sku: z.string().optional(),
+    features: z.string().optional(),
 });
 
 export const productSchema = z.object({
@@ -40,7 +41,6 @@ export const productSchema = z.object({
     category: z.string({ message: "Category is required."}),
     brand: z.string({ message: "Brand is required."}),
     description: z.string().optional(),
-    features: z.string().optional(),
     tags: z.string().optional(),
     
     // variant
@@ -50,6 +50,7 @@ export const productSchema = z.object({
     color: z.string().optional(),
     stock: z.string().optional(),
     sku: z.string().optional(),
+    features: z.string().optional(),
 });
 
 

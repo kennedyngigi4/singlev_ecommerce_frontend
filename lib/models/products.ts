@@ -28,7 +28,8 @@ export interface ProductCard {
     name: string;
     category: string;
     thumbnail: string;
-    price: string;
+    price?: string;
+    variants: any[];
 }
 
 

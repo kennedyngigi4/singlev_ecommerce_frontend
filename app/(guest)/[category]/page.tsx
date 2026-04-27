@@ -18,6 +18,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
     return <div className="w-full h-screen justify-center items-center">Failed to load product data.</div>;
   }
 
+  
   return (
     <CategoryPageClient data={data} />
   )

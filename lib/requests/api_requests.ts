@@ -134,7 +134,6 @@ async function safeParseJSON(response: Response) {
     try {
         return JSON.parse(text);
     } catch {
-        console.error("Non-JSON API response:", text);
         return { raw: text};
     }
 }

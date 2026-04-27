@@ -3,6 +3,8 @@
 import { Button } from '@/components/ui/button';
 import CustomFormField from '@/components/ui/custom-form-field';
 import { FieldGroup, FieldSet } from '@/components/ui/field';
+import { SelectItem } from '@/components/ui/select';
+import { Feature } from '@/lib/models/products';
 import { ApiRequests } from '@/lib/requests/api_requests';
 import { variantSchema } from '@/lib/validations/admin_validations';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,16 +12,18 @@ import { ArrowLeft } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from "zod";
+
 
 
 const ProductVariant = () => {
   const { data:session, status } = useSession();
   const params = useParams();
   const router = useRouter();
+  const [featuresList, setFeaturesList] = useState<Feature[]>([]);
 
   const form = useForm<z.infer<typeof variantSchema>>({
     resolver: zodResolver(variantSchema),
@@ -30,8 +34,22 @@ const ProductVariant = () => {
       color: "",
       stock: "",
       sku: "",
+      features: "",
     }
   });
+
+
+  useEffect(() => {
+      const fetchData = async() => {
+        try{
+          const featuresList = await ApiRequests.get("products/features/");
+          setFeaturesList(featuresList);
+        } catch(error){
+          toast.error("Error fetching data: " + error);
+        }
+      }
+      fetchData();
+  }, []);
 
 
   const onSubmit = async(values: z.infer<typeof variantSchema>) => {
@@ -46,10 +64,12 @@ const ProductVariant = () => {
         "color": values.color, 
         "stock": values.stock,
         "product": params.productID,
+        "features": values.features,
       }
 
       
       const resp = await ApiRequests.post("superadmin/products/add-variant/", payload, session?.sessionToken);
+      console.log(resp)
       
       if(resp.success){
         toast.success(resp.message);
@@ -116,6 +136,18 @@ const ProductVariant = () => {
                   placeholder="e.g 1250"
                 />
               </div>
+            </div>
+            <div>
+              <CustomFormField
+                fieldType="select"
+                name="features"
+                label="Choose home page feature"
+                control={form.control}
+              >
+                {featuresList.map((feature: Feature) => (
+                  <SelectItem value={feature.id} key={feature.id}>{feature.name}</SelectItem>
+                ))}
+              </CustomFormField>
             </div>
           </FieldGroup>
         </FieldSet>

@@ -21,9 +21,9 @@ import { FieldGroup, FieldSet } from '@/components/ui/field';
 
 export interface PageClientProps {
     product: any;
-    categories: any;
-    brands: any;
-    features: any;
+    categories: any[];
+    brands: any[];
+    features: any[];
 }
 
 const PageClient = ({ product, categories, brands, features }: PageClientProps) => {
@@ -127,36 +127,29 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
                                             placeholder="Choose a category"
                                         >
                                             
-                                            {categories.map((category: any) => (
+                                            {(categories ?? []).map((category: any) => (
                                                 <SelectItem value={category.id} key={category.id}>{category.name}</SelectItem>
                                             ))}
                                         </CustomFormField>
                                     </div>
+                                    
                                     <div>
-                                        <CustomFormField
-                                            fieldType="select"
-                                            name="brand"
-                                            label="Choose brand"
-                                            control={form.control}
-                                            placeholder="Choose a brand"
-                                        >
-                                            {brands.map((brand: any) => (
-                                                <SelectItem value={brand.id} key={brand.id}>{brand.name}</SelectItem>
-                                            ))}
-                                        </CustomFormField>
+                                        {brands && (
+                                            <CustomFormField
+                                                fieldType="select"
+                                                name="brand"
+                                                label="Choose brand"
+                                                control={form.control}
+                                                placeholder="Choose a brand"
+                                            >
+                                                {(brands ?? []).map((brand: any) => (
+                                                    <SelectItem value={brand.id} key={brand.id}>{brand.name}</SelectItem>
+                                                ))}
+                                            </CustomFormField>
+                                        )}
                                     </div>
                                     <div>
-                                        <CustomFormField
-                                            fieldType="select"
-                                            name="features"
-                                            label="Choose home page feature"
-                                            control={form.control}
-                                            placeholder="Choose a feature (optional)"
-                                        >
-                                            {features.map((feature: Feature) => (
-                                                <SelectItem value={feature.id} key={feature.id}>{feature.name}</SelectItem>
-                                            ))}
-                                        </CustomFormField>
+                                        
                                     </div>
                                 </div>
                                 <div>

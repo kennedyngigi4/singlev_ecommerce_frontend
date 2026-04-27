@@ -63,15 +63,9 @@ export const columns: ColumnDef<ProductCard>[] = [
         },
     },
     {
-        accessorKey: "price",
-        header: "Price (KSh)",
-        cell: ({row}) => {
-            const price = row?.original?.price;
-
-            return(
-                <p>{parseFloat(price).toLocaleString()}</p>
-            );
-        }
+        accessorKey: "variants.length",
+        header: "Variants",
+        
     },
     {
         accessorKey: "",

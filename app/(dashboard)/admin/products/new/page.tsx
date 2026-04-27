@@ -39,7 +39,6 @@ const NewProduct = () => {
       category: "",
       brand: "",
       description: "",
-      features: "",
       tags: "",
 
       price: "",
@@ -48,6 +47,7 @@ const NewProduct = () => {
       size: "",
       color: "",
       sku: "",
+      features: "",
     }
   });
   const { isSubmitting, isValid} = form.formState;
@@ -125,7 +125,7 @@ const NewProduct = () => {
       }
 
       if (values.features){
-        formData.append("features", values.features);
+        formData.append("variant.features", values.features ?? "");
       }
       
       const res = await ApiRequests.post("superadmin/products/products/", formData, session?.sessionToken);
@@ -178,7 +178,7 @@ const NewProduct = () => {
                 <div>
                   <Card>
                     <CardHeader>
-                      <CardTitle>More detials</CardTitle>
+                      <CardTitle>Variant Detials</CardTitle>
                     </CardHeader>
                     <CardContent className="flex flex-col space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -232,15 +232,29 @@ const NewProduct = () => {
                           />
                         </div>
                       </div>
-                      <div>
-                        <CustomFormField
-                          fieldType="input"
-                          inputType="text"
-                          name="sku"
-                          label="SKU"
-                          control={form.control}
-                          placeholder="e.g nike sneakers for men"
-                        />
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <CustomFormField
+                            fieldType="input"
+                            inputType="text"
+                            name="sku"
+                            label="SKU"
+                            control={form.control}
+                            placeholder="e.g nike sneakers for men"
+                          />
+                        </div>
+                        <div>
+                          <CustomFormField
+                            fieldType="select"
+                            name="features"
+                            label="Choose home page feature"
+                            control={form.control}
+                          >
+                            {featuresList.map((feature: Feature) => (
+                              <SelectItem value={feature.id} key={feature.id}>{feature.name}</SelectItem>
+                            ))}
+                          </CustomFormField>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -366,26 +380,7 @@ const NewProduct = () => {
 
 
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Home Feature</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col space-y-4">
-
-              <CustomFormField
-                fieldType="select"
-                name="features"
-                label="Choose home page feature"
-                control={form.control}
-              >
-                {featuresList.map((feature: Feature) => (
-                  <SelectItem value={feature.id} key={feature.id}>{feature.name}</SelectItem>
-                ))}
-              </CustomFormField>
-
-
-            </CardContent>
-          </Card>
+          
 
           
         </div>
