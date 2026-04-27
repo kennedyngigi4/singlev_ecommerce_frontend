@@ -34,8 +34,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "ecosystem.config.js"  ],
+    "**/*.mts",
+    "ecosystem.config.js",
+    "app/(guest)/returns-refunds-policy"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -43,7 +43,7 @@ const FooterClient = () => {
               <Link href="/about-us">
                 About Us
               </Link>
-              <Link href="/return-policy">
+              <Link href="/returns-refunds-policy">
                 Returns and Refunds Policy
               </Link>
               <Link href="">
