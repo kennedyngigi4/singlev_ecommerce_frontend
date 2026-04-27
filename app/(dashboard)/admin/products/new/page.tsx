@@ -55,15 +55,19 @@ const NewProduct = () => {
   useEffect(() => {
     const fetchCategories = async() => {
       try{
-        const [categories, brands, featuresList] = await Promise.all([
+        const [categories, brands, featuresAll] = await Promise.all([
           ApiRequests.get("superadmin/products/category-children/"),
           ApiRequests.get("products/brands/"),
-          ApiRequests.get("products/features/"),
+          ApiRequests.get("products/all_features/"),
         ]);
+
+        console.log(featuresAll);
+        console.log(categories);
+        console.log(brands);
         
         setCategories(categories);
         setBrands(brands);
-        setFeaturesList(featuresList);
+        setFeaturesList(featuresAll);
       } catch(error){
         toast.error("Error fetching data: " + error);
       }
