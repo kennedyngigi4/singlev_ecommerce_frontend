@@ -35,7 +35,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         data = JSON.parse(text);
                     } catch {
                         console.error("LOGIN API returned non-JSON:", text);
-                        throw new Error("Invalid server response.");
+                        return null;
                     }
                     
 
@@ -49,15 +49,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         };
                     }
 
-                    throw new Error(
-                        data?.message ||
-                        data?.errors?.detail ||
-                        "Invalid email or password."
-                    );
+                    return null;
 
                 } catch(e){
                     console.error("AUTH ERROR:", e);
-                    throw new Error(e instanceof Error ? e.message : "Network error");
+                    return null;
                 }
             }
         })
