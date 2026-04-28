@@ -4,9 +4,9 @@ import CategoryPageClient from './pageClient';
 
 
 type CategoryPageProps = {
-  params: {
+  params: Promise<{
     category: string;
-  }
+  }>
 }
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {

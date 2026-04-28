@@ -32,8 +32,8 @@ const ResetPassword = ({ searchParams }: PageProps) => {
         }
     });
 
-    const uid = searchParams.uid;
-    const token = searchParams.token;
+    const uid = searchParams?.uid;
+    const token = searchParams?.token;
 
     const onSubmit = async(values: z.infer<typeof resetPasswordSchema>) => {
 

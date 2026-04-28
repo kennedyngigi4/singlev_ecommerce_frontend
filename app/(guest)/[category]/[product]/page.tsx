@@ -4,10 +4,10 @@ import { ApiRequests } from '@/lib/requests/api_requests';
 import ProductClient from './product-client';
 
 type ProductDetailsProps = {
-    params: {
+    params: Promise<{
         category: string;
         product: string;
-    }
+    }>;
 }
 
 const ProductDetails = async ({ params }: ProductDetailsProps) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import { adminItems, clientItems, managerItems } from '@/lib/menus/menu-items';
 import Link from 'next/link';
@@ -19,17 +19,20 @@ export interface AppSidebarProps {
 const AppSidebar = ({ role }: AppSidebarProps) => {
 
   const {data:session} = useSession();
-  const [menuItems, setMenuItems] = useState<any[]>([]);
+  // const [menuItems, setMenuItems] = useState<any[]>([]);
   const router = useRouter();
   const { open } = useSidebar();
 
-  useEffect(() => {
-    if(role === "admin"){
-      setMenuItems(adminItems);
-    } else if (role === "client"){
-      setMenuItems(clientItems);
-    } else if (role === "manager") {
-      setMenuItems(managerItems);
+  const menuItems = useMemo(() => {
+    switch (role) {
+      case "admin":
+        return adminItems;
+      case "client":
+        return clientItems;
+      case "manager":
+        return managerItems;
+      default:
+        return [];
     }
   }, [role]);
 
