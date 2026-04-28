@@ -40,7 +40,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     
 
                     if(response.ok && data.success){
-                        return data;
+                        return {
+                            id: data.user_id,
+                            email: data.email,
+                            name: data.fullname,
+                            role: data.role,
+                            access: data.access,
+                        };
                     }
 
                     throw new Error(
@@ -67,7 +73,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             if(user){
                 token.id = user.id;
                 token.accessToken = user?.access;
-                token.name = user?.fullname;
+                token.name = user?.name;
                 token.email = user?.email;
                 token.role = user?.role;
             }
