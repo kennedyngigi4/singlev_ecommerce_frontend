@@ -8,7 +8,7 @@ const OrdersPage = async () => {
   
   const session = await auth();
 
-  const orders = await ApiRequests.get("superadmin/orders/all-orders/", session?.sessionToken);
+  const orders = await ApiRequests.get("superadmin/orders/all-orders/", session?.accessToken);
 
 
   return (

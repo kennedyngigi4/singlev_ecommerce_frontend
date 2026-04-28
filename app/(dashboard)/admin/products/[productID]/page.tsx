@@ -13,14 +13,14 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
   const { productID } = await params;
   const session = await auth();
 
-  if(!session?.sessionToken) return;
+  if (!session?.accessToken) return;
   
 
-  const product = await ApiRequests.get(`superadmin/products/products/${productID}/`, session?.sessionToken);
+  const product = await ApiRequests.get(`superadmin/products/products/${productID}/`, session?.accessToken);
   
-  const categoriesResp = await ApiRequests.get("superadmin/products/category-children/", session.sessionToken);
-  const brandsResp = await ApiRequests.get("products/brands/", session.sessionToken);
-  const featuresResp = await ApiRequests.get("products/features/", session.sessionToken);
+  const categoriesResp = await ApiRequests.get("superadmin/products/category-children/", session.accessToken);
+  const brandsResp = await ApiRequests.get("products/brands/", session.accessToken);
+  const featuresResp = await ApiRequests.get("products/features/", session.accessToken);
 
   const categories = Array.isArray(categoriesResp) ? categoriesResp : categoriesResp?.results ?? [];
   const brands = Array.isArray(brandsResp) ? brandsResp : brandsResp?.results ?? [];

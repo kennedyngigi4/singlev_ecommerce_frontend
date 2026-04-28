@@ -17,7 +17,7 @@ const OrderIDPage = async ({ params }: OrderIDPageProps) => {
     const session = await auth();
 
     
-    const order = await ApiRequests.get(`orders/order/${orderID}/`, session?.sessionToken);
+    const order = await ApiRequests.get(`orders/order/${orderID}/`, session?.accessToken);
     
     return (
         <div className="flex flex-col space-y-5 bg-white p-5"> 

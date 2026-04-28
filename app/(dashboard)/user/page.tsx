@@ -2,8 +2,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User } from '@/lib/models/user';
-import { ApiRequests } from '@/lib/requests/api_requests';
 import { Edit2Icon, PlusIcon } from 'lucide-react';
 import { getUserProfile } from "@/lib/helpers/get-user-profile";
 import Link from 'next/link';

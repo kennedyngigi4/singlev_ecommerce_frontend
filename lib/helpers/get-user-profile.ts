@@ -9,7 +9,7 @@ export async function getUserProfile(): Promise<User | null> {
 
     const res = await fetch(`${process.env.APIURL}/account/me/`, {
         headers: {
-            Authorization: `Bearer ${session?.sessionToken}`,
+            Authorization: `Bearer ${session?.accessToken}`,
         },
         cache: "no-store",
     });

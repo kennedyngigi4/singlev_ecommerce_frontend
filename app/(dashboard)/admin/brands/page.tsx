@@ -55,13 +55,13 @@ const BrandsPage = () => {
     const onSubmit = async(values: z.infer<typeof brandSchema>) => {
         setIsLoading(true);
         try {
-            if (!session?.sessionToken) return;
+            if (!session?.accessToken) return;
 
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("image", values.image);
 
-            const res = await ApiRequests.post("superadmin/products/brands/", formData, session?.sessionToken);
+            const res = await ApiRequests.post("superadmin/products/brands/", formData, session?.accessToken);
             
             if (res.success) {
                 toast.success(res.message);

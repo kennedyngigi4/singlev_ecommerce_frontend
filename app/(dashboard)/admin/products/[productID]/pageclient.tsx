@@ -57,14 +57,14 @@ const PageClient = ({ product, categories, brands, features }: PageClientProps) 
     const onProductUpdate = async(values: z.infer<typeof productSchema>) => {
         
         try {
-            if (!session?.sessionToken) return;
+            if (!session?.accessToken) return;
             const payload = {
                 ...values,
                 features: values.features ? [values.features] : [],
                 
             }
 
-            const resp = await ApiRequests.patch(`superadmin/products/products/${product.id}/`, session?.sessionToken, payload);
+            const resp = await ApiRequests.patch(`superadmin/products/products/${product.id}/`, session?.accessToken, payload);
             
             if(resp.success){
                 toast.success("Product updated.");

@@ -128,7 +128,6 @@ const NavbarClient = ({ categories }: NavbarClientProps) => {
                 </>
                 : <>
                   <Link href={session?.user?.role === "client" ? "/user" : `/${session?.user?.role}`} className="capitalize">
-
                     <Button variant="ghost" size="sm" className="hidden lg:flex cursor-pointer capitalize">
                       <User className="w-4 h-4 mr-2" />
                       {session?.user?.name}

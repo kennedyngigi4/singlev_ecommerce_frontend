@@ -21,13 +21,13 @@ const PageClient = ({ order }: PageClientProps) => {
 
     const orderDispatch = async () => {
         
-        if(!session?.sessionToken) return;
+        if(!session?.accessToken) return;
         
         const payload = {
             "id": order.id,
             "status": "in_transit"
         }
-        const resp = await ApiRequests.patch("manager/dispatch-order/", session?.sessionToken, payload);
+        const resp = await ApiRequests.patch("manager/dispatch-order/", session?.accessToken, payload);
         
         if (resp.success) {
             toast.success(resp.message);

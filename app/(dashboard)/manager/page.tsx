@@ -9,9 +9,9 @@ import { columns } from './orders/_components/columns';
 const SalesHomePage = async() => {
   const session = await auth();
 
-  if (!session?.sessionToken) return;
+  if (!session?.accessToken) return;
 
-  const stats = await ApiRequests.get("manager/stats/", session?.sessionToken);
+  const stats = await ApiRequests.get("manager/stats/", session?.accessToken);
   
 
   return (

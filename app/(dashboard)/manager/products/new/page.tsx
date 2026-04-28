@@ -93,7 +93,7 @@ const NewProduct = () => {
     const onSubmit = async (values: z.infer<typeof productSchema>) => {
       setIsLoading(true);
       try{
-        if(!session?.sessionToken) return;
+        if(!session?.accessToken) return;
   
         const formData = new FormData();
         formData.append("name", values.name);
@@ -118,7 +118,7 @@ const NewProduct = () => {
           formData.append("features", values.features);
         }
         
-        const res = await ApiRequests.post("superadmin/products/products/", formData, session?.sessionToken);
+        const res = await ApiRequests.post("superadmin/products/products/", formData, session?.accessToken);
         console.log(res);
         if(res.success){
           toast.success(res.message);

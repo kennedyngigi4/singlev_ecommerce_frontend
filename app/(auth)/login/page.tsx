@@ -55,8 +55,6 @@ const LoginPage = () => {
     try {
       const res = await AuthRequests.login(values.email, values.password);
 
-      
-
       if (res.success) {
         toast.success("Login successful.");
        

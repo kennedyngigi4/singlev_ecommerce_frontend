@@ -10,6 +10,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { CreditCard, Truck } from 'lucide-react';
 import Image from 'next/image';
 import CompanySection from './_components/company-section';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -37,9 +38,11 @@ const HomepageClient = () => {
     fetchData();
   }, []);
 
+  
+
   return (
     <div className="pt-6">
-
+      
       <div className="flex container gap-6">
         <div className="hidden md:block w-64 shrink-0">
           <SidebarMenuClient categories={categories} />

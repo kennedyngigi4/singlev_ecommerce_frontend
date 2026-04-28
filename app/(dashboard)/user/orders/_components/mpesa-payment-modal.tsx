@@ -42,7 +42,7 @@ const MpesaPaymentModal = ({ orderid, amount }: MpesaPaymentModalProps) => {
 
     const onSubmit = async(values: z.infer<typeof orderPaymentSchema>) => {
         
-        const resp = await ApiRequests.post("orders/order-payment/", values, session?.sessionToken);
+        const resp = await ApiRequests.post("orders/order-payment/", values, session?.accessToken);
         if(resp.success){
             toast.success(resp.message);
         } else {

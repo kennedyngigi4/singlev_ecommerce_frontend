@@ -17,11 +17,11 @@ const ProductsPage = () => {
 
   useEffect(() => {
     const fetchProducts = async() => {
-      const res = await ApiRequests.get("superadmin/products/products/", session?.sessionToken);
+      const res = await ApiRequests.get("superadmin/products/products/", session?.accessToken);
       setProducts(res);
     }
     fetchProducts();
-  }, [session?.sessionToken]);
+  }, [session?.accessToken]);
 
   return (
     <div className="flex flex-col space-y-3">

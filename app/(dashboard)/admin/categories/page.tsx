@@ -33,24 +33,24 @@ const CategoriesPage = () => {
 
   useEffect(() => {
     const fetchCategories = async() => {
-      if (!session?.sessionToken) return;
+      if (!session?.accessToken) return;
 
-      const res = await ApiRequests.get("superadmin/products/categories/", session?.sessionToken);
+      const res = await ApiRequests.get("superadmin/products/categories/", session?.accessToken);
       setCategories(res);
     }
     fetchCategories();
-  }, [session?.sessionToken]);
+  }, [session?.accessToken]);
 
   const onSubmit = async(values: z.infer<typeof categorySchema>) => {
     try {
-      if(!session?.sessionToken) return;
+     if (!session?.accessToken) return;
 
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("parent", values.parent);
       formData.append("thumbnail", values.thumbnail);
 
-      const res = await ApiRequests.post("superadmin/products/categories/", formData, session?.sessionToken);
+      const res = await ApiRequests.post("superadmin/products/categories/", formData, session?.accessToken);
       if(res.success){
         toast.success(res.message);
       }

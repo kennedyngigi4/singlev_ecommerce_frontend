@@ -55,7 +55,7 @@ const ProductVariant = () => {
   const onSubmit = async(values: z.infer<typeof variantSchema>) => {
     
     try {
-      if (!session?.sessionToken) return;
+      if (!session?.accessToken) return;
       const payload = {
         "sku": values.sku,
         "price": values.price,
@@ -68,7 +68,7 @@ const ProductVariant = () => {
       }
 
       
-      const resp = await ApiRequests.post("superadmin/products/add-variant/", payload, session?.sessionToken);
+      const resp = await ApiRequests.post("superadmin/products/add-variant/", payload, session?.accessToken);
       console.log(resp)
       
       if(resp.success){

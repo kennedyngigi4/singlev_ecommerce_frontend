@@ -57,7 +57,7 @@ const CheckoutClient = ({ user }: CheckoutClientProps) => {
 
         
 
-        const resp = await ApiRequests.post("orders/place-order/", payload, session?.sessionToken);
+        const resp = await ApiRequests.post("orders/place-order/", payload, session?.accessToken);
         console.log(resp);
         if(resp.success){
             toast.success(resp.message);

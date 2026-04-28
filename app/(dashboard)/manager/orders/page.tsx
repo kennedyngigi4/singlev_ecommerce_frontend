@@ -6,7 +6,7 @@ import { columns } from './_components/columns';
 
 const OrdersPage = async () => {
   const session = await auth();
-  const orders = await ApiRequests.serverGet("manager/all-orders/", session?.sessionToken);
+  const orders = await ApiRequests.serverGet("manager/all-orders/", session?.accessToken);
 
 
   return (

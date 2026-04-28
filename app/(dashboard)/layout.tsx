@@ -15,8 +15,6 @@ const DashboardLayout = ({ children } : { children: React.ReactNode}) => {
     if(status === "unauthenticated") {
       router.push("/login");
     }
-    
-
   }, [status, router]);
 
   if(status === "loading") return null;

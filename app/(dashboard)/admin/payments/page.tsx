@@ -7,7 +7,7 @@ import { columns } from './_components/columns';
 const PaymentsPage = async() => {
     const session = await auth();
 
-    const payments = await ApiRequests.get("superadmin/payments/mpesa/", session?.sessionToken);
+    const payments = await ApiRequests.get("superadmin/payments/mpesa/", session?.accessToken);
 
     return (
         <div className="flex flex-col space-y-4">

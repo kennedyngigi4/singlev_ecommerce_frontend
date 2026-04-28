@@ -2,9 +2,6 @@
 
 import React from 'react';
 import { Order } from '@/lib/models/orders';
-import { DataTable } from './_components/data-table';
-import { columns } from './_components/columns';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
 import MpesaPaymentModal from './_components/mpesa-payment-modal';

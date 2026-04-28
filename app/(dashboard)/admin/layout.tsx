@@ -9,12 +9,6 @@ const AdminLayout = ({ children }: Readonly<{ children: React.ReactNode}>) => {
   const {data:session, status} = useSession();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if(session?.user.role !== "admin"){
-  //     router.push("/");
-  //   }
-  // }, [session, router]);
-
   return (
     <div>{children}</div>
   )

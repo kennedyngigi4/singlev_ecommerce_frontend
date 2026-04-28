@@ -50,7 +50,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     );
 
                 } catch(e){
-                    throw new Error("Network error. Please check your connection and try again.")
+                    console.error("AUTH ERROR:", e);
+                    throw new Error(e instanceof Error ? e.message : "Network error");
                 }
             }
         })
@@ -75,7 +76,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
 
         async session({ session, token}) {
-            session.sessionToken = token.accessToken;
+            session.accessToken = token.accessToken;
             session.user.name = token.name;
             session.user.email = token.email;
             session.user.id = token.id;
