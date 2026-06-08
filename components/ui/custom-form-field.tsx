@@ -16,6 +16,7 @@ interface CustomFormFieldProps{
     control: Control<any>;
     inputType?: string;
     placeholder?: string;
+    description?: string;
     children?: React.ReactNode;
     disabled?: boolean;
 }
@@ -87,7 +88,7 @@ const RenderField = ({ field, state, props } : { field: any, state: any, props: 
 
 const CustomFormField = (props : CustomFormFieldProps) => {
 
-    const { label, name, control } = props;
+    const { label, name, control, description } = props;
 
     return (
         <Controller
@@ -102,6 +103,11 @@ const CustomFormField = (props : CustomFormFieldProps) => {
                     {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
                     )}
+
+                    {description && (
+                        <FieldDescription className="text-xs text-slate-500">{description}</FieldDescription>
+                    )}
+
                 </Field>
             )}
         >

@@ -22,3 +22,14 @@ export interface User{
     locations: Location[];
 }
 
+
+
+export type VendorModel = {
+    id: string
+    name: string
+    business_name: string
+    business_location: string
+    business_phone: string
+    business_status: string
+}
+

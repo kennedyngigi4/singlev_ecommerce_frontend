@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 const NewProduct = () => {
-  const {data:session} = useSession();
+    const {data:session} = useSession();
     const router = useRouter();
     const [categories, setCategories] = useState<Category[]>([]);
     const [brands, setBrands] = useState<Brand[]>([]);

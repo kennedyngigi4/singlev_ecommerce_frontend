@@ -22,9 +22,12 @@ const DashboardLayout = ({ children } : { children: React.ReactNode}) => {
   return (
     <SidebarProvider>
         <AppSidebar role={session?.user?.role} />
-        <main className='container-fluid'>
-            <SidebarTrigger />
-            <div className="py-5 w-full min-h-screen">{children}</div>
+        <main className='w-full'>
+            <div className="bg-white w-full shadow">
+              <SidebarTrigger />
+            </div>
+            
+            <div className="p-5 w-full min-h-screen">{children}</div>
             
             <div className="flex bg-white py-3 justify-center items-center">
               <p className="text-xs flex items-center">&copy; <span className="font-bold pe-1.5">2026 QUZA MAISHA LTD </span> | All Rights Reserved</p>

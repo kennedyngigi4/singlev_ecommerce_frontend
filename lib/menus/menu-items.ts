@@ -1,4 +1,4 @@
-import { BanknoteIcon, Boxes, BoxesIcon, ClipboardList, Clock11Icon, Clock4, HeartIcon, Layers3, LayoutDashboard, ListChecks, Settings, Settings2, User2, Users } from "lucide-react"
+import { BanknoteIcon, Boxes, BoxesIcon, ClipboardList, Clock11Icon, Clock4, HeartIcon, Layers3, LayoutDashboard, ListChecks, Settings, Settings2, User2, Users, Users2Icon } from "lucide-react"
 
 export const clientItems = [
     {
@@ -25,11 +25,40 @@ export const clientItems = [
 ]
 
 
+export const vendorItems = [
+    {
+        title: "Dashboard",
+        url: "/vendor",
+        icon: LayoutDashboard
+    },
+    {
+        title: "Products",
+        url: "/vendor/products",
+        icon: Boxes
+    },
+    {
+        title: "Orders",
+        url: "/vendor/orders",
+        icon: ClipboardList
+    },
+    {
+        title: "Settings",
+        url: "/vendor/settings",
+        icon: Settings
+    },
+]
+
+
 export const managerItems = [
     {
         title: "Dashboard",
         url: "/manager",
         icon: LayoutDashboard
+    },
+    {
+        title: "Vendors",
+        url: "/manager/vendors",
+        icon: Users2Icon
     },
     {
         title: "Orders",
@@ -64,6 +93,11 @@ export const adminItems = [
         title: "Brands",
         url: "/admin/brands",
         icon: Layers3
+    },
+    {
+        title: "Vendors",
+        url: "/admin/vendors",
+        icon: Users2Icon
     },
     {
         title: "Products",

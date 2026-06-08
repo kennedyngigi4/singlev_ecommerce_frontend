@@ -43,3 +43,16 @@ export const resetPasswordSchema = z.object({
     password2: z.string().min(8, "Password must be at least 8 characters."),
 })
 
+
+export const newVendorSchema = z.object({
+    fullname: z.string().min(4, "Full name should be at least 4 characters"),
+    email: z.email("Invalid email address"),
+    phone: z.string().min(4, "Phone number is required"),
+
+    businessName: z.string().min(4, "Business name is required"),
+    businessPhone: z.string().min(4, "Business phone number is required"),
+    businessLocation: z.string().min(4, "Business location is required"),
+    latitude: z.string().optional(),
+    longitude: z.string().optional(),
+})
+

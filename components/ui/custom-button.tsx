@@ -5,16 +5,23 @@ import { Button } from './button';
 
 interface CustomButtonProps {
     label: string;
-    loading: boolean;
-    loadingText: string;
+    loading?: boolean;
+    loadingText?: string;
+    btnType: "submit" | "button" | "reset"
 }
 
-const CustomButton = ({ label, loading, loadingText }: CustomButtonProps) => {
+const CustomButton = ({ label, loading, loadingText, btnType }: CustomButtonProps) => {
   return (
     
-    <Button type="submit" disabled={loading} className="cursor-pointer bg-qprimary rounded-2xl ">
+    <Button 
+      type={btnType} 
+      disabled={loading} 
+      className="cursor-pointer bg-qprimary rounded-2xl "
+    >
       {loading 
-        ? <>{loadingText}</> 
+        ? <div className="flex items-center space-x-4">
+            <span>{loadingText}</span>
+          </div> 
         : <>{label}</>
       }
     </Button>

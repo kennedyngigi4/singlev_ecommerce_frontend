@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
-import { adminItems, clientItems, managerItems } from '@/lib/menus/menu-items';
+import { adminItems, clientItems, managerItems, vendorItems } from '@/lib/menus/menu-items';
 import Link from 'next/link';
 import { LogOutIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
@@ -31,6 +31,8 @@ const AppSidebar = ({ role }: AppSidebarProps) => {
         return clientItems;
       case "manager":
         return managerItems;
+      case "vendor":
+        return vendorItems;
       default:
         return [];
     }

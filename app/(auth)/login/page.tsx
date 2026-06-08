@@ -22,6 +22,7 @@ const roleRedirectMap: Record<string, string> = {
   admin: "/admin",
   manager: "/manager",
   client: "/user",
+  vendor: "/vendor",
 }
 
 const LoginPage = () => {

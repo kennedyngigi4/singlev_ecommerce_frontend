@@ -1,0 +1,361 @@
+"use client"
+
+import React, { useEffect, useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import CustomButton from '@/components/ui/custom-button';
+import CustomFormField from '@/components/ui/custom-form-field';
+import { FieldGroup, FieldSet } from '@/components/ui/field';
+import { SelectItem } from '@/components/ui/select';
+import { Eye } from 'lucide-react';
+import { useForm } from 'react-hook-form'
+import Image from 'next/image';
+import * as z from "zod";
+import { Input } from '@/components/ui/input';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Brand, Category } from '@/lib/models/products';
+import { vendorProductSchema } from '@/lib/validations/admin_validations';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
+import { ApiRequests } from '@/lib/requests/api_requests';
+
+
+const VendorProductForm = () => {
+
+    const {data:session} = useSession();
+    const router = useRouter();
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [brands, setBrands] = useState<Brand[]>([]);
+    
+    const [thumbnail, setThumbnail] = useState<File | null>(null);
+    const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+    
+    const [isLoading, setIsLoading] = useState(false);
+    const form = useForm<z.infer<typeof vendorProductSchema>>({
+        resolver: zodResolver(vendorProductSchema),
+        defaultValues: {
+        name: "",
+        category: "",
+        brand: "",
+        description: "",
+        tags: "",
+        price: "",
+        discountprice: "",
+        stock: "",
+        size: "",
+        color: "",
+        sku: "",
+        }
+    });
+    const { isSubmitting, isValid} = form.formState;
+
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const [categories, brands] = await Promise.all([
+                    ApiRequests.get("superadmin/products/category-children/"),
+                    ApiRequests.get("products/brands/"),
+                ]);
+
+                setCategories(categories);
+                setBrands(brands);
+            } catch (error) {
+                toast.error("Error fetching data: " + error);
+            }
+        }
+        fetchCategories();
+    }, []);
+
+
+    const thumbnailSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setThumbnail(file);
+
+        const previewURL = URL.createObjectURL(file);
+        setThumbnailPreview(previewURL);
+
+
+    }
+
+    useEffect(() => {
+        return () => {
+            if (thumbnailPreview) {
+                URL.revokeObjectURL(thumbnailPreview);
+            }
+        };
+    }, [thumbnailPreview]);
+
+    const onSubmit = async(values: z.infer<typeof vendorProductSchema>) => {
+        setIsLoading(true);
+        try{
+            if(!session?.accessToken) return;
+        
+
+            const formData = new FormData();
+            formData.append("name", values.name);
+            formData.append("category", values.category);
+            formData.append("brand", values.brand);
+            formData.append("thumbnail", thumbnail);
+            formData.append("variant.price", values.price);
+            formData.append("variant.discount_price", values.discountprice ?? "");
+            formData.append("variant.size", values.size ?? "");
+            formData.append("variant.color", values.color ?? "");
+            formData.append("variant.stock", values.stock ?? "");
+            formData.append("variant.sku", values.sku ?? "");
+            
+        
+            if (values.description){
+                formData.append("description", values.description);
+            }
+        
+            
+            
+            const res = await ApiRequests.post("vendor/products/", formData, session?.accessToken);
+            console.log(res);
+            if(res.success){
+                toast.success(res.message);
+                router.push(`/vendor/products`);
+            } else {
+                toast.error("An error occured");
+            }
+    
+        } catch(error){
+            toast.error("A network error has occurred.");
+        } finally{
+            setIsLoading(false);
+        }
+    }
+
+    return (
+        <div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-12 gap-5">
+                <div className="md:col-span-8">
+
+
+                    <FieldSet>
+                        <FieldGroup className="gap-4">
+
+                            <Card>
+                                <CardContent className="flex flex-col space-y-5">
+                                    <CustomFormField
+                                        fieldType="input"
+                                        name="name"
+                                        label="Name"
+                                        control={form.control}
+                                        placeholder="e.g Airmax shoes"
+                                    />
+
+                                    <CustomFormField
+                                        fieldType="textarea"
+                                        name="description"
+                                        label="Description"
+                                        control={form.control}
+                                        placeholder="Enter product description here ..."
+                                    />
+                                </CardContent>
+                            </Card>
+
+                            <div>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Variant Detials</CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="flex flex-col space-y-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <CustomFormField
+                                                    fieldType="input"
+                                                    name="price"
+                                                    label="Price(KSh)"
+                                                    control={form.control}
+                                                    placeholder="e.g 8500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <CustomFormField
+                                                    fieldType="input"
+                                                    name="discountprice"
+                                                    label="Discount Price (optional)"
+                                                    control={form.control}
+                                                    placeholder="e.g 6850"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div>
+                                                <CustomFormField
+                                                    fieldType="input"
+                                                    name="size"
+                                                    label="Size"
+                                                    control={form.control}
+                                                    placeholder="e.g SM"
+                                                />
+                                            </div>
+                                            <div>
+                                                <CustomFormField
+                                                    fieldType="input"
+                                                    inputType="text"
+                                                    name="color"
+                                                    label="Color"
+                                                    control={form.control}
+                                                    placeholder="e.g red"
+                                                />
+                                            </div>
+                                            <div>
+                                                <CustomFormField
+                                                    fieldType="input"
+                                                    inputType="text"
+                                                    name="stock"
+                                                    label="Stock Quantity"
+                                                    control={form.control}
+                                                    placeholder="e.g 20"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <CustomFormField
+                                                fieldType="input"
+                                                inputType="text"
+                                                name="sku"
+                                                label="SKU"
+                                                control={form.control}
+                                                placeholder="e.g nike sneakers for men"
+                                            />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle>Thumbnail</CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="flex flex-col space-y-4">
+                                            {/* Preview */}
+                                            {thumbnailPreview && (
+                                                <div className="relative w-32 h-32 border rounded-md overflow-hidden">
+                                                    <Image
+                                                        src={thumbnailPreview}
+                                                        alt="Thumbnail preview"
+                                                        fill
+                                                        className="object-cover"
+                                                        sizes="128px"
+                                                    />
+                                                </div>
+                                            )}
+
+                                            <Input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={thumbnailSelect}
+                                            />
+                                        </CardContent>
+                                    </Card>
+                                </div>
+
+                                <div>
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle>Gallery (optional)</CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="flex flex-col space-y-4">
+
+
+
+                                            {/* <Input
+                            type="file"
+                            accept="image/*"
+                            onChange={thumbnailSelect}
+                            /> */}
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </div>
+
+
+
+
+                        </FieldGroup>
+                    </FieldSet>
+                </div>
+                <div className="md:col-span-4 space-y-5">
+                    
+
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Category</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex flex-col space-y-4">
+
+                            <CustomFormField
+                                fieldType="select"
+                                label="Choose category"
+                                name="category"
+                                control={form.control}
+                            >
+
+                                {categories?.map((category: any) => (
+                                    <SelectItem value={category.id} key={category.id}>{category.name}</SelectItem>
+                                ))}
+                            </CustomFormField>
+
+
+                        </CardContent>
+                    </Card>
+
+
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Brand</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex flex-col space-y-4">
+
+                            <CustomFormField
+                                fieldType="select"
+                                name="brand"
+                                label="Choose brand"
+                                control={form.control}
+                            >
+                                {brands?.map((brand: any) => (
+                                    <SelectItem value={brand.id} key={brand.id}>{brand.name}</SelectItem>
+                                ))}
+                            </CustomFormField>
+
+
+                        </CardContent>
+                    </Card>
+
+
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Publish</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex flex-col space-y-4">
+
+                            <div className="flex space-x-1 text-sm items-center"><Eye size={18} /> Visibility: <span className="font-bold pl-3">Public</span></div>
+
+                            <CustomButton
+                                label="Publish"
+                                loadingText="Processing ..."
+                                loading={isLoading}
+                                btnType="submit"
+                            />
+                        </CardContent>
+                    </Card>
+
+
+                </div>
+            </form>
+        </div>
+    );
+}
+
+export default VendorProductForm
